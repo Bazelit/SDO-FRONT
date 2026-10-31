@@ -25,8 +25,8 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
     }
 
 
-    const DowlandFile = async (task_id, student_id) => {
-        await dowlandFile(task_id, student_id)
+    const DowlandFile = async (task_id, student_id,solution_id) => {
+        await dowlandFile(task_id, student_id, solution_id)
     }
 
     const changeEsp = () => {
@@ -47,7 +47,7 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
     }
 
     return (
-        <S.StudentsLab $color={isSubmitted ? (score > 75 ? "#E6F4CF" : "#F9DFDF8C") : "#F0F0F0"}>
+        <S.StudentsLab $color={isSubmitted ? (score > 60 ? "#E6F4CF" : "#F9DFDF8C") : "#F0F0F0"}>
             <S.StudentsLabText>
                 {name}
             </S.StudentsLabText>
@@ -86,7 +86,7 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
                 <S.BtnSave onClick = {() => {changeMark(task_id, stud_id, scoreInput)}}>
                     {save}
                 </S.BtnSave>
-            </S.StudentLabAction>) : (<S.StudentLabNo><S.StudentLabChange>Не оценено</S.StudentLabChange></S.StudentLabNo>)
+            </S.StudentLabAction>) : (<S.StudentLabNo><S.StudentLabChange>Не выполнено</S.StudentLabChange></S.StudentLabNo>)
             }
         </S.StudentsLab>
 

@@ -4,6 +4,17 @@ import Header from "./components/header/Header";
 import MainRouter from "./app/routing";
 import Footer from "./components/Footer/Footer";
 import FooterMobile from "./components/Footer/FooterMobile";
+import styled from 'styled-components';
+
+const Page = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Main = styled.main`
+  flex: 1;
+`;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -31,9 +42,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        <MainRouter setIsLoggedIn={setIsLoggedIn} />
-        <FooterMobile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Page>
+          <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Main>
+              <MainRouter setIsLoggedIn={setIsLoggedIn} />
+          </Main>
+          <FooterMobile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Page>
       </Router>
     </div>
   );

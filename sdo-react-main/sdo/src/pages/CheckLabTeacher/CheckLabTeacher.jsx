@@ -89,6 +89,29 @@ const CheckLabTeacher = () => {
                     <S.DescriptionText>{description_test_vovod}</S.DescriptionText>
                 </S.DescriptionTest>
             </S.Description>
+            <S.LimitBlock>
+                            <S.LimitBlockName>Ограничения задачи</S.LimitBlockName>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Количество переменных:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_variables || "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Длина кода:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_code_length ? (task?.max_code_length + ' строк') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Объем памяти:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_memory_mb ? (task?.max_memory_mb + ' кб') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Время выполнения:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_execution_time_sec ? (task?.max_execution_time_sec + ' сек') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Количество попыток:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{(task?.max_attempts || "-") + " попыток"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                        </S.LimitBlock>
             <S.StudentList>
                 <S.StudentListH1>Список студентов:</S.StudentListH1>
                 <S.StudentListUp>

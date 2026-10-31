@@ -16,7 +16,7 @@ const Section = styled.div`
 const Footer = () => {
   return (
     <Section>
-      <p>© 2025 Все права защищены</p>
+      <p>© 2026 Все права защищены</p>
     </Section>
   );
 };

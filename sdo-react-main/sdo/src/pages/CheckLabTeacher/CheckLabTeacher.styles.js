@@ -12,17 +12,19 @@ export const container = styled.div`
 `
 
 export const Description = styled.div`
-  width: 1125px;
+  width: 1189px;
   background-color: #DDE5F8;
-  padding: 32px 64px;
+  padding: 32px 32px;
 `
 
 export const DescriptionText = styled.p`
-  font-size: 16px;
+font-family: Montserrat;
+font-weight: 500;
+ font-size: 20px;
 `
 
 export const DescriptionTextBold = styled.p`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold
 `
 
@@ -46,6 +48,7 @@ export const StudentListH1 = styled.h1`
   leading-trim: NONE;
   line-height: 27px;
   letter-spacing: 0%;
+  margin-left: 32px;
 `
 
 export const SearchInputContainer = styled.div`
@@ -307,3 +310,34 @@ export const ErrorNotification = styled.div`
     }
   }
 `;
+
+export const LimitBlock = styled.div`
+    background-color:#F0F0F0;
+    margin-top: 20px;
+    padding: 32px 32px;
+    border-radius: 4px;
+    width: 1189px;
+`
+
+export const LimitBlockName = styled.h1`
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 24px;
+`
+export const LimitBlockLi = styled.div`
+    display:flex;
+    position: relative;
+`
+export const LimitBlockText = styled.h1`
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 18px;
+`
+
+export const LimitBlockTextZ = styled.h1`
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 18px;
+    position: absolute;
+    right: 0px;
+`
