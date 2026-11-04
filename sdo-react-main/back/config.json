@@ -1,0 +1,13 @@
+{
+  "origins": [
+    "http://localhost:4000"
+  ],
+  "credentials": true,
+  "methods": [
+    "*"
+  ],
+  "headers": [
+    "*"
+  ],
+  "secret_key": "test"
+}

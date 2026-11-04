@@ -1,0 +1,172 @@
+import * as S from './CheckLabTeacher.styles'
+import { useParams } from 'react-router-dom';
+import { getTaskById, getStudentResultLabId } from '../../api/file-api';
+import React, { useState, useEffect } from 'react';
+import { getGroups } from '../../api/teacher-api';
+import StudentLab from './components/StudentLab';
+
+
+const CheckLabTeacher = () => {
+    const [searchValue, setSearchValue] = useState("");
+    const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState('')
+    const [selectedSort, setSelectedSort] = useState('')
+    const [studentsData, setStudentData] = useState([])
+    const [task, setTask] = useState('')
+
+    const { task_id } = useParams();
+    useEffect(() => {
+        console.log('Загрузка задачи с ID:', task_id);
+        getTaskById(task_id)
+          .then((res) => {
+            setTask(res.data);
+          })
+          .catch((error) => {
+            console.error('Ошибка загрузки задачи:', error.message);
+          });
+        getStudentResultLabId(task_id)
+        .then((res)=>{
+            setStudentData(res.data)
+        }).catch(error => 
+            console.error('Ошибка загрузки задачи:', error.message)
+        )
+      }, [task_id]);
+
+    
+    const handleSearchChange = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+  const handleSelectGroup = (e) => {
+    setSelectedGroup(e.target.value); 
+  };
+  const handleSelectSort = (e) => {
+    setSelectedSort(e.target.value); 
+  };
+
+  const handleSearch = () => {
+    console.log("Поиск запущен!");
+  };
+
+    const fetchGroups = async () => {
+        try{
+            const response = await getGroups()
+            setGroups(response.data)
+        }catch(error){
+            console.error("Ошибка при загрузке групп:", error.message);
+            setGroups([]);
+        }}
+        
+    useEffect(()=>{
+        fetchGroups()
+    }, [])
+
+
+    const task_descript = task?.description?.split(/\\n|\n/)
+    const description = task_descript?.[0] || 'Нет данных'
+    const description_test_vovd = task_descript?.[1]?.match(/\d+/g)?.join(' ') || 'Нет данных'
+    const description_test_vovod = task_descript?.[2]?.match(/\d+/g)?.join(' ') || 'Нет данных'
+
+    const sorts = [
+            { id: '1', name: 'По фамилии (А-Я)' },
+            { id: '2', name: 'По убыванию оценки' },
+            { id: '3', name: 'По возрастанию оценки' },
+        ]
+    return (
+        <S.container>
+            <S.Description>
+                <S.DescriptionText>
+                    {description}
+                </S.DescriptionText>
+                <S.DescriptionTest>
+                    <S.DescriptionTextBold>Формат вводных данных</S.DescriptionTextBold>
+                    <S.DescriptionText>{description_test_vovd}</S.DescriptionText>
+                    <S.DescriptionTextBold>Формат выводных данных</S.DescriptionTextBold>
+                    <S.DescriptionText>{description_test_vovod}</S.DescriptionText>
+                    <S.DescriptionTextBold>Пример ввода</S.DescriptionTextBold>
+                    <S.DescriptionText>{description_test_vovd}</S.DescriptionText>
+                    <S.DescriptionTextBold>Пример вывода</S.DescriptionTextBold>
+                    <S.DescriptionText>{description_test_vovod}</S.DescriptionText>
+                </S.DescriptionTest>
+            </S.Description>
+            <S.LimitBlock>
+                            <S.LimitBlockName>Ограничения задачи</S.LimitBlockName>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Количество переменных:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_variables || "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Длина кода:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_code_length ? (task?.max_code_length + ' строк') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Объем памяти:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_memory_mb ? (task?.max_memory_mb + ' кб') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Время выполнения:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{task?.max_execution_time_sec ? (task?.max_execution_time_sec + ' сек') : "-"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                            <S.LimitBlockLi>
+                                <S.LimitBlockText>Количество попыток:</S.LimitBlockText>
+                                <S.LimitBlockTextZ>{(task?.max_attempts || "-") + " попыток"}</S.LimitBlockTextZ>
+                            </S.LimitBlockLi>
+                        </S.LimitBlock>
+            <S.StudentList>
+                <S.StudentListH1>Список студентов:</S.StudentListH1>
+                <S.StudentListUp>
+                <S.SearchInputContainer>
+                    <S.SearchInput
+                    type="text"
+                    placeholder="Поиск студента"
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                    />
+                    <S.SearchIcon onClick={() => handleSearch()} />
+                </S.SearchInputContainer>
+                <S.Sort>
+                <S.Select value={selectedSort} onChange={handleSelectSort}>
+                    <option value="">Сортировать по...</option>
+                    {(
+                    sorts.map((sort) => (
+                        <option key={sort.id} value={sort.name}>
+                        {sort.name}
+                        </option>
+                    ))
+                    )}
+                </S.Select>
+
+                <S.Select value={selectedGroup} onChange={handleSelectGroup}>
+                    <option value="">Группа</option>
+                    {groups.map((group) => (
+                    <option key={group.id} value={group.name}>
+                        {group.name}
+                    </option>
+                    ))}
+                </S.Select>
+                </S.Sort>
+                </S.StudentListUp>
+                {studentsData
+                .filter((student) => {if (searchValue === '') {return true} return student.fullName.toLowerCase().includes(searchValue.toLowerCase())})
+                .filter((student) => {if (selectedGroup === '') {return true} return student.group === selectedGroup})
+                .slice()
+                .sort((a,b) => {
+                    if (selectedSort === "По фамилии (А-Я)"){
+                        return a.fullName.localeCompare(b.fullName, 'ru');
+                    }
+                    if (selectedSort === "По убыванию оценки"){
+                        return b.score - a.score;
+                    }
+                    if (selectedSort === "По возрастанию оценки"){
+                        return a.score - b.score;
+                    }
+                })
+                .map((student) => {
+                    return <StudentLab key = {student.id} name = {student.fullName} isSubmitted = {student.isSubmitted} score = {student.score ?? 0} task_id = {task_id} stud_id = {student.id} ></StudentLab>
+                })}
+            </S.StudentList>
+        </S.container>
+    )
+}
+
+export default CheckLabTeacher
