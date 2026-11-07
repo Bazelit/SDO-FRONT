@@ -80,7 +80,7 @@ const LabRow = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: #fff;
+  background-color: ${({ $failed }) => ($failed ? "#F9DFDF" : "#fff")};
   border-radius: 6px;
   padding: 10px 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -88,7 +88,7 @@ const LabRow = styled.div`
   transition: background-color 0.3s ease; /* Плавный переход для hover */
 
   &:hover {
-    background-color: #f5f5f5; /* Лёгкий серый фон при наведении */
+    background-color: ${({ $failed }) => ($failed ? "#F3CECE" : "#f5f5f5")};
   }
 `;
 
@@ -140,6 +140,12 @@ export default function DisciplinesStud() {
             {labsInfo.map((lab) => (
               <LabRow
                 key={lab.id}
+                $failed={
+                  lab.completed === false ||
+                  !["success", "passed"].includes(
+                    String(lab.status ?? "").trim().toLowerCase(),
+                  )
+                }
                 onClick={() => navigate(`/LabaStud/${lab.id}`)} // Делаем весь блок кликабельным
               >
                 <LabItem name={lab.name} grade={lab.status} />

@@ -205,8 +205,8 @@ export const StudentLabChange = styled.div`
 `
 
 export const BtnSave = styled.button`
-  width: 149;
-  height: 39;
+  width: 149px;
+  height: 39px;
   opacity: 1;
   border-radius: 4px;
   border: none;
@@ -217,6 +217,11 @@ export const BtnSave = styled.button`
   font-size: 16px;
   text-align: center;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `
 
 
@@ -245,6 +250,13 @@ export const ScoreEditBox = styled.div`
     text-align: center;
     vertical-align: middle;
     }
+`
+
+export const ScoreError = styled.div`
+  color: #c62828;
+  font-size: 12px;
+  line-height: 1.2;
+  margin-top: 4px;
 `
 
 export const Notification = styled.div`

@@ -528,7 +528,7 @@ const LabaStud = () => {
           Ваши попытки:
           <strong>{" " + task.attempts_user.attempt_used}</strong>
           <Divider></Divider>
-          Всего ваших попыток: 
+          Всего ваших попыток:
           <strong>{" " + task.attempts_user.attempt_all}</strong>
           <Divider></Divider>
           Осталось попыток:
@@ -548,8 +548,8 @@ const LabaStud = () => {
               <SolutionItem key={index}>
                 <SolutionHeader>
                   <SolutionTitle>Решение {index + 1}</SolutionTitle>
-                  <SolutionCodeBtn 
-                  $isOpen={!!showSolutionsCode[solution.id]} 
+                  <SolutionCodeBtn
+                  $isOpen={!!showSolutionsCode[solution.id]}
                   onClick = {() => {
                     setShowSolutionsCode((prev) => ({
                       ...prev,
@@ -562,23 +562,37 @@ const LabaStud = () => {
                 </SolutionHeader>
                 {showSolutionsCode[solution.id]  && (<SolutionCode>{solution.code}</SolutionCode>)}
                 <Text><strong>Статус решения:</strong> {(isLoad && solution.id == lastSolutionId) ? "Идет тестирование" : (solution.status === 'unknown' ? "Не протестировано" : solution.status)}
-                {solution.status === 'Failed' && <ErrorTestBtn 
+                {solution.status === 'Failed' && <ErrorTestBtn
                 $isOpen={showErrorTestCase[solution.id]}
                 onClick = {() => {
                   setShowErrorTestCase((prev) => ({
-                    ...prev, 
+                    ...prev,
                     [solution.id]: !prev[solution.id]
                   }))
                 }}
                 ></ErrorTestBtn>}
                 </Text>
                 {showErrorTestCase[solution.id] && <ErrorTestCase>
+                  {(solution.test_result?.code_output ||
+                    solution.test_result?.error ||
+                    solution.test_result?.message ||
+                    solution.error_message) && (
+                    <>
+                      <strong>Ошибка тестов</strong>
+                      <UserOutput>
+                        {solution.test_result?.code_output ||
+                          solution.test_result?.error ||
+                          solution.test_result?.message ||
+                          solution.error_message}
+                      </UserOutput>
+                    </>
+                  )}
                   <strong>Входящие данные</strong>
-                  <InputValue>{solution.test_result.input_data}</InputValue>
+                  <InputValue>{solution.test_result?.input_data ?? "—"}</InputValue>
                   <strong>Выходные данные</strong>
-                  <ExpectedOutput>{solution.test_result.expected_output}</ExpectedOutput>
+                  <ExpectedOutput>{solution.test_result?.expected_output ?? "—"}</ExpectedOutput>
                   <strong>Выходные данные пользователя</strong>
-                  <UserOutput>{solution.test_result.user_output}</UserOutput>
+                  <UserOutput>{solution.test_result?.user_output ?? "—"}</UserOutput>
                   </ErrorTestCase>}
               </SolutionItem>
             ))}

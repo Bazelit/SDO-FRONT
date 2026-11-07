@@ -19,7 +19,7 @@ const LabGrade = styled.p`
   font-size: 14px;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: ${({ grade }) => (grade === 'Success' ? '#85A4518C' : '#FF7070')};
+  background-color: ${({ grade }) => (grade === 'Success' ? '#2E7D32' : '#C62828')};
   color: white;
   margin: 0;
   font-weight: 600;

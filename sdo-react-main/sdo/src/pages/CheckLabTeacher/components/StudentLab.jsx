@@ -12,16 +12,30 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
     const [isEditingScore, setIsEditingScore] = useState(false)
     const [scoreInput, setScoreInput] = useState('')
     const [save, setSave] = useState('Сохранить')
+    const [isSaving, setIsSaving] = useState(false)
     const navigate = useNavigate();
+    const parsedScore = Number(scoreInput);
+    const isScoreValid = scoreInput.trim() !== '' &&
+        Number.isFinite(parsedScore) &&
+        parsedScore >= 0 &&
+        parsedScore <= 100;
 
-    const changeMark = (taskId, userId, newMark) => {
-        const responce = patchMark(taskId, userId, newMark)
-        responce.then((data)=>{
-            console.log(data.data)
+    const changeMark = async (taskId, userId) => {
+        if (!isScoreValid) {
+            setSave('Введите балл от 0 до 100');
+            return;
+        }
+
+        setIsSaving(true);
+        try {
+            await patchMark(taskId, userId, parsedScore);
             setSave('Сохранено')
-        }).catch(error => {
-            console.log(error)
-        })
+        } catch (error) {
+            console.error('Ошибка сохранения оценки:', error);
+            setSave('Ошибка сохранения');
+        } finally {
+            setIsSaving(false);
+        }
     }
 
 
@@ -31,12 +45,6 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
 
     const changeEsp = () => {
         setIsEditingScore((prev) => !prev)
-    }
-
-    const handleSaveScore = () => {
-        if (!isNaN(Number(scoreInput)) && Number(scoreInput) >= 0 && Number(scoreInput) <= 100) {
-            setScoreInput(scoreInput)
-        }
     }
 
     const scoreChange = () => {
@@ -61,29 +69,40 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
                         <S.ScoreEditBox>
                             Введите оценку
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
+                            max="100"
+                            step="any"
                             value={scoreInput}
                             onClick={(e) => e.stopPropagation()}
-                            onChange={(e) => {if ( 0 <= Number(e.target.value) && Number(e.target.value) <= 100) setScoreInput(e.target.value)}}
-                            onBlur={() => {
-                                handleSaveScore(); 
-                                setIsEditingScore(false);
+                            onChange={(e) => {
+                                setScoreInput(e.target.value);
+                                setSave('Сохранить');
                             }}
+                            onBlur={() => setIsEditingScore(false)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                handleSaveScore();
-                                setIsEditingScore(false);
+                                    setIsEditingScore(false);
                                 }
                             }}
                             placeholder="0-100"
                             autoFocus
                         />
+                        {scoreInput !== '' && !isScoreValid && (
+                            <S.ScoreError role="alert">
+                                Балл должен быть от 0 до 100
+                            </S.ScoreError>
+                        )}
                         </S.ScoreEditBox>
                     ) : <span onClick={() => changeEsp()} style={{ cursor: 'pointer' }}>
                             {scoreChange()}
                         </span>}
                 </S.StudentLabChange>
-                <S.BtnSave onClick = {() => {changeMark(task_id, stud_id, scoreInput)}}>
+                <S.BtnSave
+                    type="button"
+                    disabled={!isScoreValid || isSaving}
+                    onClick={() => changeMark(task_id, stud_id)}
+                >
                     {save}
                 </S.BtnSave>
             </S.StudentLabAction>) : (<S.StudentLabNo><S.StudentLabChange>Не выполнено</S.StudentLabChange></S.StudentLabNo>)

@@ -42,17 +42,47 @@ const ChangeButton = styled.button`
   }
 `;
 
+const ScoreEditor = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+
+  input {
+    width: 76px;
+    height: 36px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+`;
+
 const StudentLabs = ({ studentName, labWorks }) => {
   const [scores, setScores] = useState(labWorks.map((work) => work.score));
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [scoreInput, setScoreInput] = useState("");
 
   const handleChangeScore = (index) => {
-    const newScore = prompt("Введите новую оценку:", scores[index]);
+    setScoreInput(String(scores[index] ?? ""));
+    setEditingIndex(index);
+  };
 
-    if (newScore !== null) {
-      const updatedScores = [...scores];
-      updatedScores[index] = parseInt(newScore, 10);
-      setScores(updatedScores);
+  const handleSaveScore = (index) => {
+    const score = Number(scoreInput);
+    if (
+      scoreInput.trim() === "" ||
+      !Number.isFinite(score) ||
+      score < 0 ||
+      score > 100
+    ) {
+      return;
     }
+
+    setScores((currentScores) =>
+      currentScores.map((currentScore, scoreIndex) =>
+        scoreIndex === index ? score : currentScore,
+      ),
+    );
+    setEditingIndex(null);
   };
 
   // Проверяем, все ли работы сданы
@@ -75,9 +105,48 @@ const StudentLabs = ({ studentName, labWorks }) => {
             {work.passed !== undefined ? (
               <>
                 <LabWorkItem score={scores[index]} passed={work.passed} />
-                <ChangeButton onClick={() => handleChangeScore(index)}>
-                  Изменить оценку
-                </ChangeButton>
+                {editingIndex === index ? (
+                  <ScoreEditor>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="any"
+                      value={scoreInput}
+                      onChange={(event) => {
+                        const nextScore = event.target.value;
+                        const numericScore = Number(nextScore);
+                        if (
+                          nextScore === "" ||
+                          (Number.isFinite(numericScore) &&
+                            numericScore >= 0 &&
+                            numericScore <= 100)
+                        ) {
+                          setScoreInput(nextScore);
+                        }
+                      }}
+                      aria-label="Оценка от 0 до 100"
+                    />
+                    <ChangeButton
+                      disabled={
+                        scoreInput.trim() === "" ||
+                        !Number.isFinite(Number(scoreInput)) ||
+                        Number(scoreInput) < 0 ||
+                        Number(scoreInput) > 100
+                      }
+                      onClick={() => handleSaveScore(index)}
+                    >
+                      Сохранить
+                    </ChangeButton>
+                    <ChangeButton onClick={() => setEditingIndex(null)}>
+                      Отмена
+                    </ChangeButton>
+                  </ScoreEditor>
+                ) : (
+                  <ChangeButton onClick={() => handleChangeScore(index)}>
+                    Изменить оценку
+                  </ChangeButton>
+                )}
               </>
             ) : (
               <>
