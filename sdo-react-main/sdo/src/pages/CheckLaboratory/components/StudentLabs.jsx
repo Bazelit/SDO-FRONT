@@ -5,7 +5,7 @@ import LabWorkItem from "./LabWorkItem";
 const StyledContainer = styled.div`
   background-color: #eff5e5;
   font-family: "Montserrat";
-  width: 1480px;
+  width: 100%;
   padding: 0px 20px;
   display: flex;
   justify-content: space-between;
@@ -13,6 +13,12 @@ const StyledContainer = styled.div`
   margin: 20px 0;
   transition: background-color 0.3s;
   background-color: ${({ allPassed }) => (allPassed ? "#EFF5E5" : "#F9DFDF")};
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
 `;
 
 const StudentName = styled.div`
@@ -23,6 +29,20 @@ const StudentName = styled.div`
 const LabWorkContainer = styled.div`
   display: flex;
   align-items: center;
+
+  > div {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    > div {
+      margin-left: 0 !important;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
 `;
 
 const ChangeButton = styled.button`
@@ -39,6 +59,11 @@ const ChangeButton = styled.button`
 
   &:hover {
     background-color: #0056b3;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+    margin-left: 0;
   }
 `;
 

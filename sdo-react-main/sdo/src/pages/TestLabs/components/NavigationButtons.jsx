@@ -10,6 +10,21 @@ const NavContainer = styled.div`
   gap: 300px;
   max-width: 100%;
   border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+
+    a,
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 const NavButton = styled.button`
@@ -21,6 +36,7 @@ const NavButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
+  min-height: 44px;
 `;
 
 const NavigationButtons = () => {

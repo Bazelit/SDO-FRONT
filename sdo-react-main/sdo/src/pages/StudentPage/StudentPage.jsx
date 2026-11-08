@@ -13,12 +13,31 @@ const SectionLab = styled.div`
   display: flex;
   gap: 100px;
   justify-content: center;
-  padding: 50px 0px;
+  padding: 50px 20px;
   min-height: 100vh;
+
+  @media (max-width: 1100px) {
+    gap: 40px;
+  }
+
+  /* планшеты и телефоны: колонки друг под другом */
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 16px 48px;
+    min-height: 0;
+  }
+
+  @media (max-width: 480px) {
+    gap: 24px;
+    padding: 24px 12px 40px;
+  }
 `;
 
 const List = styled.div`
   width: 350px;
+  max-width: 100%;
   padding: 20px;
   background-color: #BECBEE;
   border-radius: 7px;
@@ -26,19 +45,30 @@ const List = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 16px;
+  }
 `;
 
 const ListSubject = styled.div`
   width: 500px;
-  height: 100%;
-  max-height: 30px;
-  padding: 15px 25px;
+  max-width: 100%;
+  min-height: 60px;
+  padding: 12px 25px;
   background-color: ${props => props.$isCompleted ? "#4CAF50" : "#fff"};
   border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 16px;
+  }
 `;
 
 const BigList = styled.div`
@@ -51,6 +81,11 @@ const BigList = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+
+  @media (max-width: 900px) {
+    padding: 24px 16px;
+    gap: 16px;
+  }
 `;
 
 const Text = styled.p`
@@ -82,6 +117,13 @@ const RowBlocks = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  min-width: 0;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    max-width: 600px;
+    gap: 16px;
+  }
 `;
 
 export default function StudentPage() {

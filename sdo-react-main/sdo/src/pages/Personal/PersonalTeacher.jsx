@@ -231,10 +231,13 @@ const RowBlocks = styled.div`
     width: 100%;
     display: none;
     background-color: #FF7070;
+    border: none;
     border-radius: 8px;
     color: white;
     text-decoration: none;
     height: 50px;
+    font-family: "Montserrat";
+    cursor: pointer;
   }
   .Btn{
     width: 100%;
@@ -250,7 +253,9 @@ const RowBlocks = styled.div`
     max-width: 100%;
     gap: 12px;
     .Btn{
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 16px;
     }
     .BtnEx{
@@ -325,6 +330,8 @@ const PersonalTeacher = () => {
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("status");
+    // сообщаем App, что токен удалён, чтобы шапка и нижнее меню обновились
+    window.dispatchEvent(new Event("storage"));
     navigate("/");
   };
 

@@ -21,6 +21,13 @@ const Label = styled.label`
   width: 100%;
   transition: background-color 0.3s;
   background-color: #FFFFFF;
+  cursor: pointer;
+  padding: 0 12px;
+  overflow-wrap: anywhere;
+
+  @media (max-width: 600px) {
+    height: 140px;
+  }
 
   &:hover {
     background-color: #E2EDD08C;
