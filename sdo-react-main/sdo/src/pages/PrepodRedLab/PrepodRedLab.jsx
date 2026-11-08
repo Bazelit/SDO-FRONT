@@ -1,5 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import {
+  Section,
+  BigBlock,
+  MinBlock,
+  UlMinBlock,
+  UlList,
+  List,
+  TitleInput,
+  TestsIOBlock,
+  RestrictionsBlock,
+  RestrictionRoom,
+  TitleBlock,
+  ButtonAdd,
+  FormSelect,
+  Notification,
+  TwoColumnRow,
+} from "../../styles/labFormStyles";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoIosClose } from "react-icons/io";
@@ -19,340 +35,6 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
-
-const Section = styled.form`
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-`;
-
-const BigBlock = styled.div`
-  max-width: 1248px;
-  width: 100%;
-  min-height: ${({ $BigHeight }) => ($BigHeight ? "530px" : "400px")};
-  max-height: 530px;
-  background-color: ${({ $BigFon }) => ($BigFon ? "#E2EDD0" : "#D5DEF6")};
-  border-radius: 10px;
-  display: flex;
-  gap: ${({ $GapForm }) => ($GapForm ? "75px" : "0px")};
-  overflow: hidden;
-
-  .block__test {
-    width: 540px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-    position: relative;
-    right: 2%;
-  }
-  .block__one {
-    margin-top: 5px;
-    width: 700px;
-    position: relative;
-    top: 4%;
-    overflow-y: auto;
-    max-height: 480px;
-  }
-`;
-
-const MinBlock = styled.li`
-  width: 592px;
-  min-height: 102px;
-  height: auto;
-  border-radius: 10px;
-  background-color: #ffffff;
-  padding: 10px;
-  list-style-type: none;
-  position: relative;
-  .icon {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-  }
-`;
-
-const UlMinBlock = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 5px;
-  padding-right: 10px;
-  margin: 0 0 10px 0;
-  list-style: none;
-`;
-
-const UlList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  padding: 0;
-  margin: 40px auto;
-  width: 100%;
-  max-width: 1248px;
-
-  .editing__block-Two {
-    padding: 0px 30px 30px 20px;
-  }
-  .editing__block-text {
-    color: #000;
-    font-family: "Montserrat";
-    font-size: 16px;
-  }
-  .editing__block-input {
-    width: 555px;
-    min-height: 100px;
-    border-radius: 7px;
-    border-style: none;
-    color: #000;
-    font-family: "Montserrat";
-    font-size: 16px;
-    line-height: 27px;
-    outline: none;
-    resize: none;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding: 10px 15px;
-  }
-  .editing__block-name {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-  }
-  .some-input {
-    border: none;
-    border-bottom: 1px solid #000;
-    background-color: transparent;
-    color: inherit;
-    outline: none;
-    margin-left: 5px;
-    font-family: "Montserrat";
-  }
-  .block__button {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .block__end {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: #e2edd0;
-    border-radius: 5px;
-    width: 1248px;
-    height: 117px;
-    justify-content: center;
-    border-style: none;
-    align-items: center;
-    cursor: pointer;
-    &:hover {
-      background-color: #d7ebb5eb;
-    }
-  }
-  .block__end-link {
-    color: #000;
-    font-size: 16px;
-    font-family: "Montserrat";
-    line-height: 27px;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    width: 1248px;
-  }
-`;
-
-const List = styled.li`
-  width: ${({ $Block }) => ($Block ? "1248px" : "608px")};
-  min-height: ${({ $Block }) => ($Block ? "80px" : "260px")};
-  background-color: ${({ $Back }) => ($Back ? "#E2EDD0" : "#D5DEF6")};
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  list-style-type: none;
-  padding: 0 16px;
-  box-sizing: border-box;
-`;
-
-const TitleInput = styled.input`
-  width: 100%;
-  max-width: 100%;
-  height: 80px;
-  font-size: 18px;
-  padding: 0 20px;
-  border: none;
-  border-radius: 7px;
-  outline: none;
-  font-family: "Montserrat";
-  background-color: #ffffff;
-  box-sizing: border-box;
-`;
-
-const TestsIOBlock = styled.div`
-  width: 1248px;
-  background-color: #d5def6;
-  border-radius: 10px;
-  height: 450px;
-  .tests-input-title {
-    font-size: 19px;
-    font-family: "Montserrat";
-    font-weight: 500;
-    margin-bottom: 15px;
-    margin-left: 20px;
-  }
-  .tests-input {
-    margin-bottom: 15px;
-    margin-left: 20px;
-  }
-  .hint {
-    font-size: 14px;
-    font-family: "Montserrat";
-    color: #555;
-    margin: 5px 0;
-  }
-  .tools {
-    display: flex;
-    gap: 15px;
-    margin: 10px 0;
-  }
-  .tool-icon {
-    font-size: 28px;
-    cursor: pointer;
-    color: #333;
-    &:hover {
-      color: #4caf50;
-    }
-  }
-  .textarea {
-    width: 96.5%;
-    height: 150px;
-    border-radius: 7px;
-    border: none;
-    padding: 10px;
-    font-family: "Montserrat";
-    font-size: 14px;
-    outline: none;
-    resize: vertical;
-  }
-`;
-
-const RestrictionsBlock = styled.div`
-  width: 1210px;
-  background-color: #e2edd0;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-`;
-
-const RestrictionRoom = styled.div`
-  width: calc(20% - 16px);
-  min-width: 200px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  .room-title {
-    font-size: 16px;
-    font-family: "Montserrat";
-    font-weight: 500;
-    margin: 0;
-  }
-  .room-input {
-    height: 40px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    padding: 0 10px;
-    font-family: "Montserrat";
-    font-size: 14px;
-    outline: none;
-    &:focus {
-      border-color: #4caf50;
-    }
-  }
-`;
-
-const TitleBlock = styled.h3`
-  color: #000;
-  font-family: "Montserrat";
-  font-size: ${({ $FontSize }) => ($FontSize ? "16px" : "19px")};
-  font-weight: ${({ $FontWeight }) => ($FontWeight ? "400" : "500")};
-  line-height: ${({ $LineHeight }) => ($LineHeight ? "45px" : "27px")};
-  padding-left: ${({ $Padding }) => ($Padding ? "45px" : "0px")};
-  margin: ${({ $Margin }) => ($Margin ? "0px" : "none")};
-`;
-
-const ButtonAdd = styled.button`
-  font-family: "Montserrat";
-  width: ${({ $ButtonAddW }) => ($ButtonAddW ? "400px" : "274px")};
-  flex-shrink: 0;
-  border-radius: 4px;
-  border: none;
-  background: #fff;
-  height: 42px;
-  cursor: pointer;
-  margin-left: 20px;
-  &:hover {
-    background: #c8d5f6;
-    color: #fff;
-    transition: 0.5s;
-  }
-`;
-
-const FormSelect = styled.select`
-  height: 45px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  font-family: "Montserrat";
-  padding: 0 35px 0 10px;
-  width: 100%;
-  margin-bottom: 12px;
-  box-sizing: border-box;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 14px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Notification = styled.div`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 15px 20px;
-  border-radius: 5px;
-  color: #fff;
-  font-family: "Montserrat";
-  font-size: 14px;
-  background-color: ${({ $isSuccess }) => ($isSuccess ? "#28a745" : "#dc3545")};
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 1000;
-`;
-
-const TwoColumnRow = styled.div`
-  display: flex;
-  gap: 25px;
-  width: 1248px;
-  > * {
-    flex: 1;
-  }
-`;
 
 const PrepodRedLab = () => {
   const { id } = useParams();
@@ -582,8 +264,8 @@ const PrepodRedLab = () => {
   return (
     <>
       <Section onSubmit={(e) => e.preventDefault()}>
-        <UlList>
-          <List $Block style={{ width: "1248px", height: "120px" }}>
+        <UlList $Margin="40px auto">
+          <List $Block>
             <TitleInput
               type="text"
               placeholder="Введите название лабораторной работы"
@@ -611,8 +293,8 @@ const PrepodRedLab = () => {
             </List>
             <List $Back>
               <div className="editing__block-Two" style={{ width: "100%" }}>
-                <div style={{ display: "flex", gap: "16px", width: "100%" }}>
-                  <div style={{ flex: 1 }}>
+                <div className="selects-row">
+                  <div>
                     <TitleBlock>Группа</TitleBlock>
                     <p className="editing__block-text">Выберите группу</p>
                     <FormSelect value={selectedGroup} onChange={(e) => setSelectedGroup(e.target.value)}>
@@ -624,7 +306,7 @@ const PrepodRedLab = () => {
                       ))}
                     </FormSelect>
                   </div>
-                  <div style={{ flex: 1 }}>
+                  <div>
                     <TitleBlock>Предмет</TitleBlock>
                     <p className="editing__block-text">Выберите предмет</p>
                     <FormSelect value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
@@ -721,7 +403,7 @@ const PrepodRedLab = () => {
                 onChange={(e) => setBulkTestsText(e.target.value)}
               />
             </div>
-            <ButtonAdd onClick={importTestsFromText}>Импортировать тесты</ButtonAdd>
+            <ButtonAdd type="button" onClick={importTestsFromText}>Импортировать тесты</ButtonAdd>
           </TestsIOBlock>
 
           <RestrictionsBlock>
@@ -785,7 +467,7 @@ const PrepodRedLab = () => {
         </UlList>
       </Section>
       {showNotification && (
-        <Notification $isSuccess={isSuccess} $visible={showNotification}>
+        <Notification className="app-toast" $isSuccess={isSuccess} $visible={showNotification}>
           {responseMessage}
         </Notification>
       )}

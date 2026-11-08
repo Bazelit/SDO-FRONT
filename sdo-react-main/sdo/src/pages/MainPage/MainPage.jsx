@@ -110,9 +110,11 @@ const MainPage = () => (
         Здесь вы сможете проходить и проверять лабораторные работы,
         просматривать результаты и вести историю своего обучения.
       </p>
-      <Link to="/login" class="login_link">
-        Вход/Регистрация
-      </Link>
+      {!localStorage.getItem("access_token") && (
+        <Link to="/login" className="login_link">
+          Вход/Регистрация
+        </Link>
+      )}
     </Hero>
   </Wrapper>
 );

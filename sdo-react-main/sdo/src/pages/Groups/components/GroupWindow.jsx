@@ -7,7 +7,9 @@ const StyledContainer = styled.div`
 
   font-family: "Montserrat";
 
-  width: 1480px;
+  width: 100%;
+
+  max-width: 1480px;
 
   height: 100px;
 
@@ -20,6 +22,18 @@ const StyledContainer = styled.div`
   justify-content: space-between;
 
   margin: 30px auto;
+
+  gap: 12px;
+
+  @media (max-width: 480px) {
+    height: auto;
+    min-height: 100px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding: 16px;
+    margin: 16px auto;
+  }
 
   transition: background-color 0.3s;
 

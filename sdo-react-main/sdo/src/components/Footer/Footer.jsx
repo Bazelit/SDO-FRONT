@@ -10,7 +10,18 @@ const Section = styled.div`
   justify-content: center;
   padding: 10px 0;
   flex-shrink: 0; /* Предотвращает сжатие футера */
-  height: 60px; /* Фиксированная высота для футера */
+  min-height: 80px; /* Высота футера (как раньше: 60px + отступы) */
+  text-align: center;
+
+  p {
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 56px;
+    font-size: 13px;
+  }
 `;
 
 const Footer = () => {
@@ -21,4 +32,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer;
