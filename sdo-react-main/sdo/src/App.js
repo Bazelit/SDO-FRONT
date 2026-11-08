@@ -5,6 +5,7 @@ import MainRouter from "./app/routing";
 import Footer from "./components/Footer/Footer";
 import FooterMobile from "./components/Footer/FooterMobile";
 import styled from 'styled-components';
+import "./styles/style.css";
 
 const Page = styled.div`
   min-height: 100vh;

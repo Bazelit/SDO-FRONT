@@ -6,6 +6,10 @@ const ListContainer = styled.div`
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
 `;
 
 const AttemptsWrapper = styled.div`
@@ -21,16 +25,29 @@ const AttemptRow = styled.div`
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+  gap: 12px;
+
+  @media (max-width: 480px) {
+    padding: 14px 16px;
+  }
 `;
 
 const AttemptName = styled.div`
   margin-left: 30px;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const AttemptResult = styled.div`
   margin-right: 50px;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
 `;
 
 const AttemptsList = () => {

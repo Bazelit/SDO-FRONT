@@ -6,7 +6,8 @@ import { uploadByTaskId, testingTask, getTaskById } from '../../api/file-api';
 import { deleteSolution, hiddenSolution } from '../../api/tasks-api';
 
 const Container = styled.div`
-  width: 1280px;
+  width: 100%;
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -14,18 +15,34 @@ const Container = styled.div`
   padding: 20px;
   font-family: "Montserrat", sans-serif;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    gap: 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 12px;
+  }
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   width: 100%;
 `;
 
 const TitleText = styled.p`
   font-size: 20px;
   text-align: left;
+  min-width: 0;
+
+  @media (max-width: 480px) {
+    font-size: 17px;
+    margin: 4px 0;
+  }
 `;
 
 const StatusMarker = styled.div`
@@ -35,6 +52,8 @@ const StatusMarker = styled.div`
   color: white;
   font-size: 14px;
   font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
 `;
 
 const BlockTest = styled.div`
@@ -49,6 +68,10 @@ const BlockDescription = styled.div`
   background-color: #E0E0E0;
   border-radius: 7px;
   padding: 15px;
+
+  @media (max-width: 480px) {
+    padding: 10px 12px;
+  }
 `;
 
 const BlockLimits = styled.div`
@@ -56,6 +79,10 @@ const BlockLimits = styled.div`
   background-color: #F5F0E6;
   border-radius: 7px;
   padding: 15px;
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
 `;
 
 const LimitsTitle = styled.p`
@@ -104,6 +131,11 @@ const SolutionContainer = styled.div`
   padding: 15px;
   background-color: #FFFFFF;
   border-radius: 7px;
+
+  @media (max-width: 480px) {
+    margin-top: 12px;
+    padding: 10px;
+  }
 `;
 
 const SolutionCode = styled.pre`
@@ -112,6 +144,12 @@ const SolutionCode = styled.pre`
   padding: 10px;
   border-radius: 5px;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 
 const ToggleButton = styled.button`
@@ -141,11 +179,18 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   margin: 10px;
+  cursor: pointer;
 
   &:hover {
     background: #D9D9D9;
     color: #000;
     transition: 0.3s;
+  }
+
+  @media (max-width: 600px) {
+    height: 56px;
+    margin: 0;
+    background-color: #DDE5F8;
   }
 `;
 
@@ -154,6 +199,11 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   gap: 20px;
   width: 100%;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const UploadTitle = styled.div`
@@ -278,6 +328,7 @@ const SolutionHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  min-height: 32px;
 `;
 
 const SolutionTitle = styled.h2`
@@ -349,8 +400,9 @@ const ErrorTestBtn = styled.span`
 
 const BlockAttempts = styled.div`
     display: flex;
-    min-width: 650px;
-    max-width: 675px;
+    flex-wrap: wrap;
+    align-self: flex-start;
+    max-width: 100%;
     align-items: center;
     gap: 6px;
     min-height: 49px;
@@ -360,13 +412,27 @@ const BlockAttempts = styled.div`
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
+
+    /* телефон: каждая строка статистики отдельно, без разделителей */
+    @media (max-width: 600px) {
+        align-self: stretch;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 8px 12px;
+        font-size: 16px;
+    }
 `
 
 const Divider = styled.div`
   margin: 0 8px;
   width: 2px;
   height: 30px;
-  background-color: #000000
+  background-color: #000000;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 
@@ -534,14 +600,20 @@ const LabaStud = () => {
 
       <BlockTask>
         <BlockAttempts>
-          Ваши попытки:
-          <strong>{" " + task.attempts_user.attempt_used}</strong>
+          <span>
+            Ваши попытки:
+            <strong>{" " + task.attempts_user.attempt_used}</strong>
+          </span>
           <Divider></Divider>
-          Всего ваших попыток: 
-          <strong>{" " + task.attempts_user.attempt_all}</strong>
+          <span>
+            Всего ваших попыток: 
+            <strong>{" " + task.attempts_user.attempt_all}</strong>
+          </span>
           <Divider></Divider>
-          Осталось попыток:
-          <strong>{" " + task.max_attempts - task.attempts_user.attempt_used}</strong>
+          <span>
+            Осталось попыток:
+            <strong>{" " + task.max_attempts - task.attempts_user.attempt_used}</strong>
+          </span>
         </BlockAttempts>
         {task.solutions.length > 0 && (
           <SolutionContainer>
@@ -609,6 +681,7 @@ const LabaStud = () => {
 
       {notification && (
         <Notification
+          className="app-toast"
           success={notification.success}
           isExiting={isNotificationExiting}
         >

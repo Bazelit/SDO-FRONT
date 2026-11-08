@@ -15,6 +15,13 @@ const ContentWrapper = styled.div`
   max-width: 100%;
   padding: 20px 20px 60px;
   flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 16px 16px 40px;
+  }
+  @media (max-width: 480px) {
+    padding: 12px 12px 32px;
+  }
 `;
 
 const TestLabs = () => {

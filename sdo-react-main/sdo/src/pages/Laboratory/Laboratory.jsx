@@ -349,10 +349,8 @@ const SpnLab = styled.span`
     border-style: none;
   }
 
-  @media (max-width: 1300px) {
-    .hideable{
-      display: none;
-    }
+  .section__lab-edit--wide {
+    width: 220px;
   }
 
   @media (max-width: 768px) {
@@ -364,6 +362,9 @@ const SpnLab = styled.span`
       font-size: 14px;
       padding: 8px;
     }
+    .section__lab-edit--wide {
+      width: 190px;
+    }
   }
 
   @media (max-width: 570px) {
@@ -371,7 +372,8 @@ const SpnLab = styled.span`
     align-items: stretch;
     gap: 8px;
 
-    .section__lab-edit {
+    .section__lab-edit,
+    .section__lab-edit--wide {
       width: 100%;
     }
   }
@@ -830,8 +832,7 @@ const Laboratory = () => {
                   <SpnLab>
                     <Link
                       to={`/checklabteacher/${item.id}`}
-                      className="section__lab-edit hideable"
-                      style={{ width: "220px" }}
+                      className="section__lab-edit section__lab-edit--wide"
                     >
                       Просмотр результатов
                     </Link>
@@ -898,7 +899,7 @@ const Laboratory = () => {
         )}
       </SectionLab>
       <Notification
-        className={notification.isError ? "error" : ""}
+        className={`app-toast ${notification.isError ? "error" : ""}`}
         visible={notification.visible}
       >
         {notification.message}

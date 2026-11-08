@@ -6,6 +6,11 @@ const LabItemContainer = styled.div`
   align-items: center;
   gap: 30px; /* Увеличиваем расстояние между названием и статусом */
   flex: 1;
+  min-width: 0;
+
+  @media (max-width: 480px) {
+    gap: 12px;
+  }
 `;
 
 const LabName = styled.p`
@@ -13,6 +18,11 @@ const LabName = styled.p`
   color: #000;
   margin: 0;
   flex: 1;
+  min-width: 0;
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+  }
 `;
 
 const LabGrade = styled.p`
@@ -23,6 +33,8 @@ const LabGrade = styled.p`
   color: white;
   margin: 0;
   font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
 `;
 
 const LabItem = ({ name, grade }) => {
