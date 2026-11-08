@@ -86,13 +86,17 @@ const Title = styled.h1`
 `;
 
 const Text = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   margin-left: 10px;
   font-family: Montserrat;
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0%;
+
+  span{
+  font-weight:600
+  }
 `;
 
 const SolutionContainer = styled.div`
@@ -495,6 +499,11 @@ const LabaStud = () => {
       </HeaderContainer>
       <BlockDescription>
         <Text>{task.description.replace(/\\n/g, '\n')}</Text>
+        <Text><span>Тестовый пример:</span></Text>
+        <Text><span>Входные данные</span></Text>
+        <Text>{task?.first_test_case?.inp}</Text>
+        <Text><span>Выходные данные</span></Text>
+        <Text>{task?.first_test_case?.out}</Text>
       </BlockDescription>
 
       {hasLimits && (

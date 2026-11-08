@@ -61,27 +61,21 @@ const SeeResultStudent = () => {
 
     
 
-    const task_descript = task?.description?.split(/\\n|\n/)
-    const description = task_descript?.[0] || 'Нет данных'
-    const description_test_vovd = task_descript?.[1]?.match(/\d+/g)?.join(' ') || 'Нет данных'
-    const description_test_vovod = task_descript?.[2]?.match(/\d+/g)?.join(' ') || 'Нет данных'
+
 
 
     return(
         <S.Container>
             <S.Description>
                 <S.DescriptionText>
-                    {description}
+                    {task?.description?.replace(/\\n/g, '\n')}
                 </S.DescriptionText>
                 <S.DescriptionTest>
+                    <S.DescriptionTextBold>Тестовый пример:</S.DescriptionTextBold>
                     <S.DescriptionTextBold>Формат вводных данных</S.DescriptionTextBold>
-                    <S.DescriptionText>{description_test_vovd}</S.DescriptionText>
+                    <S.DescriptionText>{task?.first_test_case?.inp}</S.DescriptionText>
                     <S.DescriptionTextBold>Формат выводных данных</S.DescriptionTextBold>
-                    <S.DescriptionText>{description_test_vovod}</S.DescriptionText>
-                    <S.DescriptionTextBold>Пример ввода</S.DescriptionTextBold>
-                    <S.DescriptionText>{description_test_vovd}</S.DescriptionText>
-                    <S.DescriptionTextBold>Пример вывода</S.DescriptionTextBold>
-                    <S.DescriptionText>{description_test_vovod}</S.DescriptionText>
+                    <S.DescriptionText>{task?.first_test_case?.out}</S.DescriptionText>
                 </S.DescriptionTest>
             </S.Description>
             <S.LimitBlock>
