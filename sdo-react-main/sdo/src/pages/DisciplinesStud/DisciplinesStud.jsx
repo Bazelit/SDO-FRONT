@@ -92,6 +92,17 @@ const LabRow = styled.div`
   }
 `;
 
+const isLabNotStarted = (lab) =>
+  ["", "not_started", "pending", "unknown"].includes(
+    String(lab.status ?? "").trim().toLowerCase(),
+  );
+
+const isLabFailed = (lab) =>
+  !["success", "passed"].includes(
+    String(lab.status ?? "").trim().toLowerCase(),
+  ) &&
+  !(lab.completed !== true && isLabNotStarted(lab));
+
 export default function DisciplinesStud() {
   const [labsInfo, setLabsInfo] = useState([]);
   const [subjectName, setSubjectName] = useState("");
@@ -111,7 +122,11 @@ export default function DisciplinesStud() {
         setLabsInfo(tasks);
 
         const totalTasks = tasks.length;
-        const submitted = tasks.filter(task => task.status === "Success").length;
+        const submitted = tasks.filter((task) =>
+          ["success", "passed"].includes(
+            String(task.status ?? "").trim().toLowerCase(),
+          ),
+        ).length;
         const grade = totalTasks > 0 ? Math.round((submitted / totalTasks) * 100) : 0;
 
         setStats({
@@ -140,12 +155,7 @@ export default function DisciplinesStud() {
             {labsInfo.map((lab) => (
               <LabRow
                 key={lab.id}
-                $failed={
-                  lab.completed === false ||
-                  !["success", "passed"].includes(
-                    String(lab.status ?? "").trim().toLowerCase(),
-                  )
-                }
+                $failed={isLabFailed(lab)}
                 onClick={() => navigate(`/LabaStud/${lab.id}`)} // Делаем весь блок кликабельным
               >
                 <LabItem name={lab.name} grade={lab.status} />

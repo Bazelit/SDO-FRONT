@@ -330,6 +330,23 @@ const SearchIcon = styled(FaSearch)`
   color: #000;
 `;
 
+const getLabStatus = (lab) => {
+  const status = String(lab.status ?? "").trim().toLowerCase();
+
+  if (["success", "passed"].includes(status)) {
+    return "success";
+  }
+
+  if (
+    lab.completed !== true &&
+    ["", "not_started", "pending", "unknown"].includes(status)
+  ) {
+    return "notStarted";
+  }
+
+  return "failed";
+};
+
 const StudLaboratory = () => {
   const [labItems, setLabItems] = useState({ isLoading: true, data: [] });
   const [searchValue, setSearchValue] = useState("");
@@ -448,14 +465,7 @@ const StudLaboratory = () => {
           filteredLabs.map((lab) => (
             <LabItem
               key={lab.id}
-              $status={
-                lab.completed === false ||
-                !["success", "passed"].includes(
-                  String(lab.status ?? "").trim().toLowerCase(),
-                )
-                  ? "failed"
-                  : String(lab.status || "").toLowerCase()
-              }
+              $status={getLabStatus(lab)}
             >
               <NameLab>{lab.name}</NameLab>
               <TaskButton onClick={() => handleLabClick(lab.id)}>
