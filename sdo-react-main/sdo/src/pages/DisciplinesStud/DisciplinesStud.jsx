@@ -13,9 +13,17 @@ const PageContainer = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 20px 60px;
+
+  @media (max-width: 768px) {
+    padding: 16px 16px 40px;
+  }
+  @media (max-width: 480px) {
+    padding: 12px 12px 32px;
+  }
 `;
 
 const Title = styled.p`
@@ -30,6 +38,13 @@ const TitleSection = styled.section`
   border-radius: 8px;
   padding: 10px 20px;
   margin-bottom: 20px;
+  max-width: 100%;
+
+  @media (max-width: 480px) {
+    display: block;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+  }
 `;
 
 const GreenSection = styled.section`
@@ -38,6 +53,13 @@ const GreenSection = styled.section`
   background-color: #E6F4CF;
   border-radius: 8px;
   padding: 40px;
+
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+  }
+  @media (max-width: 480px) {
+    padding: 16px 12px;
+  }
 `;
 
 const StatsTitle = styled.p`
@@ -54,6 +76,12 @@ const StatsRow = styled.div`
   gap: 20px;
   align-items: center;
   margin-bottom: 30px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
 `;
 
 const StatBox = styled.div`
@@ -73,6 +101,10 @@ const LabsContainer = styled.div`
   padding: 0;
   align-items: center;
   gap: 25px;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
 `;
 
 const LabRow = styled.div`
@@ -84,6 +116,7 @@ const LabRow = styled.div`
   border-radius: 6px;
   padding: 10px 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  min-height: 48px;
   cursor: pointer; /* Курсор как у кнопки */
   transition: background-color 0.3s ease; /* Плавный переход для hover */
 

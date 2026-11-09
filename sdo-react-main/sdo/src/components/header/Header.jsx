@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Bread from "../BreadCrumbs";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const HeaderStyle = styled.header`
   width: 100%;
@@ -24,6 +25,19 @@ const HeaderWrapper = styled.div`
     height: 56px;
     width: auto;
     transition: height 0.3s ease;
+  }
+
+  /* на ширине меньше контейнера страницы добавляем боковые отступы,
+     чтобы логотип и кнопки не прилипали к краям экрана */
+  @media (max-width: 1300px) {
+    padding: 12px 20px 0;
+  }
+  @media (max-width: 768px) {
+    padding: 10px 16px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 8px 16px;
+    gap: 12px;
   }
 
   @media (max-width: 1200px) { img { height: 55px; } }
@@ -92,17 +106,19 @@ const Nav = styled.nav`
   @media (max-width: 640px) {
     .header__nav-lr { padding: 0 12px; font-size: 13px; }
   }
-  @media (max-width: 570px) {
-    .header__nav-lr {
-      max-width: 90px; padding: 0 10px; height: 30px; font-size: 12px;
-    }
+  @media (max-width: 680px) {
     .label-full { display: none; }
     .label-short { display: inline; }
   }
-  @media (max-width: 480px) {
+  /* на телефонах разделы переезжают в нижнюю навигацию (FooterMobile),
+     в шапке остаётся только «Войти» или «Выйти» */
+  @media (max-width: 600px) {
+    gap: 8px;
     .header__nav-lr {
-      max-width: 75px; padding: 0 8px; height: 28px; font-size: 11px;
+      height: 36px; padding: 0 14px; font-size: 14px;
     }
+    /* прячем разделы, только если показано нижнее меню */
+    body.has-mobile-nav & .header__nav-lr--section { display: none; }
   }
 `;
 
@@ -139,8 +155,23 @@ const ButtonEx = styled.button`
   @media (max-width: 900px) { padding: 0 16px; font-size: 14.5px; }
   @media (max-width: 768px) { padding: 0 14px; font-size: 13.5px; }
   @media (max-width: 640px) { padding: 0 12px; font-size: 13px; }
-  @media (max-width: 570px) { max-width: 70px; padding: 0 10px; height: 30px; font-size: 12px; }
-  @media (max-width: 480px) { display: none; }
+  @media (max-width: 600px) {
+    width: auto;
+    height: 36px;
+    padding: 0 12px;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  svg {
+    display: none;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 600px) {
+    svg { display: block; }
+  }
 `;
 
 const PAGE_CONFIG = {
@@ -221,17 +252,26 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
           <Nav>
             {isLoggedIn ? (
               <>
-                <Link to={getPersonalAccount()} className="header__nav-lr">
+                <Link
+                  to={getPersonalAccount()}
+                  className="header__nav-lr header__nav-lr--section"
+                >
                   <span className="label-full">Личный кабинет</span>
                   <span className="label-short">Лич. кабинет</span>
                 </Link>
 
-                <Link to={getLaboratoryRoute()} className="header__nav-lr">
+                <Link
+                  to={getLaboratoryRoute()}
+                  className="header__nav-lr header__nav-lr--section"
+                >
                   <span className="label-full">Лабораторные работы</span>
                   <span className="label-short">Лаб. работы</span>
                 </Link>
 
-                <ButtonEx onClick={handleLogout}>Выйти</ButtonEx>
+                <ButtonEx onClick={handleLogout} aria-label="Выйти">
+                  <IoLogOutOutline aria-hidden="true" />
+                  Выйти
+                </ButtonEx>
               </>
             ) : (
               <Link to="/login" className="header__nav-lr">

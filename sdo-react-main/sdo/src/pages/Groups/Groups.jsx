@@ -8,6 +8,13 @@ const StudentsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px;
+
+  @media (max-width: 768px) {
+    margin: 16px;
+  }
+  @media (max-width: 480px) {
+    margin: 12px;
+  }
 `;
 
 const GroupHeader = styled.div`
@@ -20,6 +27,12 @@ const GroupHeader = styled.div`
   border-radius: 7px;
   margin-bottom: 20px;
   color: #333;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    padding: 8px 0;
+    margin-bottom: 8px;
+  }
 `;
 
 const StudentList = styled.ul`
@@ -41,17 +54,30 @@ const StudentItem = styled.li`
   justify-content: space-between;
   transition: background-color 0.3s;
   border-radius: 7px;
+  gap: 12px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
 `;
 
 const StudentInfo = styled.div`
   display: flex;
   align-items: center;
+  min-width: 0;
 `;
 
 const StudentName = styled.div`
   font-weight: normal;
   font-size: 20px;
   margin-right: 20px;
+
+  @media (max-width: 480px) {
+    font-size: 17px;
+    margin-right: 0;
+  }
 `;
 
 const ViewButton = styled.button`
@@ -64,6 +90,7 @@ const ViewButton = styled.button`
   cursor: pointer;
   height: 42px;
   padding: 0 15px;
+  flex-shrink: 0;
 
   &:hover {
     background-color: #0056b3;

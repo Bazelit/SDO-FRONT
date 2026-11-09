@@ -8,6 +8,12 @@ const GridContainer = styled.div`
   padding: 30px 10px;
   border-radius: 8px;
   margin-bottom: 20px;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    padding: 12px 8px;
+    gap: 8px;
+  }
 `;
 
 const Column = styled.div`
@@ -16,11 +22,17 @@ const Column = styled.div`
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  min-width: 0;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 const Block = styled.div`
   background-color: #fff;
   width: 400px;
+  max-width: 100%;
   height: 100px;
   padding: 10px;
   border-radius: 4px;
@@ -29,7 +41,15 @@ const Block = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center
+  text-align: center;
+  overflow-wrap: anywhere;
+
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 80px;
+    font-size: 14px;
+    padding: 8px 4px;
+  }
 `;
 
 const TestResult = () => {

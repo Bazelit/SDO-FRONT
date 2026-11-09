@@ -9,23 +9,44 @@ const Section = styled.section`
     align-items: flex-start;
     flex-direction: column;
     padding-left: 8%;
+    padding-right: 20px;
     gap: 35px;
     padding-top: 2%;
     .block__test{
-        width: 1294px;
+        width: 100%;
+        max-width: 1294px;
         background-color: #E2EDD0;
-        height: 85px;
+        min-height: 85px;
         border-radius: 10px;
         margin-top: 5px;
         margin-bottom: 40px;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    @media (max-width: 1300px) {
+        padding: 20px;
+    }
+    @media (max-width: 768px) {
+        padding: 16px;
+        gap: 16px;
+        .block__test {
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 16px;
+        }
+    }
+    @media (max-width: 480px) {
+        padding: 12px;
     }
 `
 
 const Attempt = styled.div`
     width: 294px;
+    max-width: 100%;
     height: 64px;
     background-color: #D9D9D9;
     color: #000000;
@@ -46,8 +67,10 @@ const Text = styled.p`
 `
 
 const Block = styled.div`
-    width: 1294px;
-    height: ${({ $height }) => $height ? '585px' : '196px'};
+    width: 100%;
+    max-width: 1294px;
+    min-height: ${({ $height }) => $height ? '585px' : '196px'};
+    padding: 20px;
     background-color: #D5DEF6;
     border-radius: 10px;
     display: flex;
@@ -60,6 +83,13 @@ const Block = styled.div`
         justify-content: center;    
         flex-direction: column;
         gap: 15px;
+        width: 100%;
+        padding: 0;
+    }
+
+    @media (max-width: 768px) {
+        min-height: 0;
+        padding: 12px;
     }
 `
 const Ul = styled.ul`
@@ -67,12 +97,26 @@ const Ul = styled.ul`
     align-items: center;
     gap: 65px;
     padding: 0;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 320px));
+
+    @media (max-width: 1100px) {
+        gap: 16px;
+    }
+    @media (max-width: 768px) {
+        gap: 8px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 480px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
 `
 const Li = styled.li`
-    width: 320px;
-    height: 102px;
+    width: 100%;
+    min-height: 102px;
+    padding: 8px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,10 +125,22 @@ const Li = styled.li`
     font-size: 16px;
     font-weight: 400;
     font-family: 'Montserrat';
+
+    @media (max-width: 768px) {
+        min-height: 64px;
+        font-size: 14px;
+    }
+    @media (max-width: 480px) {
+        min-height: 48px;
+    }
 `
 const LiStatus = styled.li`
-    width: 1000px;
-    height: 55px;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 55px;
+    padding: 0 12px;
+    flex-wrap: wrap;
+    column-gap: 16px;
     border-radius: 10px;
     background-color: ${({ status }) => status === 'WA' ? '#FF0000' : '#ffffff'};
     list-style-type: none;
@@ -93,7 +149,10 @@ const LiStatus = styled.li`
 `
 const Span = styled.span`
     width: 426px;
-    height: 45px;
+    max-width: 100%;
+    min-height: 45px;
+    text-align: center;
+    padding: 0 12px;
     background-color: #ffffff;
     border-radius: 10px;
     display: flex;
@@ -117,6 +176,13 @@ const Span = styled.span`
         font-size: 16px;
         font-weight: 400;
         font-family: 'Montserrat';
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        :hover {
+            width: 100%;
+        }
     }
 `;
 

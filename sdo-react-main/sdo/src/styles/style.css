@@ -12,6 +12,74 @@ textarea {
     font: inherit;
 }
 
+/* ===== Базовые правила адаптива (действуют на всём сайте) ===== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    /* высота нижней мобильной навигации; > 0 только когда она показана */
+    --mobile-nav-h: 0px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-wrap: break-word;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg,
+video {
+    max-width: 100%;
+}
+
+pre,
+code {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+@media (max-width: 600px) {
+    body.has-mobile-nav {
+        --mobile-nav-h: 64px;
+        padding-bottom: calc(var(--mobile-nav-h) + var(--safe-bottom));
+    }
+}
+
+/* iOS увеличивает страницу при фокусе на поле со шрифтом < 16px */
+@media (max-width: 768px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Уведомления: не залезают под нижнюю навигацию и не шире экрана */
+.app-toast {
+    bottom: calc(20px + var(--mobile-nav-h) + var(--safe-bottom)) !important;
+}
+
+@media (max-width: 600px) {
+    .app-toast {
+        left: 12px !important;
+        right: 12px !important;
+        max-width: none !important;
+        text-align: center;
+    }
+}
+
+/* ===== Конец базовых правил ===== */
+
 .section__lab-page{
     width: 100%;
     max-width: 1246px;

@@ -115,13 +115,17 @@ const Title = styled.h1`
 `;
 
 const Text = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   margin-left: 10px;
   font-family: Montserrat;
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0%;
+
+  span{
+  font-weight:600
+  }
 `;
 
 const SolutionContainer = styled.div`
@@ -411,6 +415,7 @@ const BlockAttempts = styled.div`
     font-size: 18px;
     line-height: 27px;
 
+    /* телефон: каждая строка статистики отдельно, без разделителей */
     @media (max-width: 600px) {
         align-self: stretch;
         flex-direction: column;
@@ -604,6 +609,7 @@ const LabaStud = () => {
           <Divider></Divider>
           <span>
             Всего ваших попыток:
+            Всего ваших попыток:
             <strong>{" " + task.attempts_user.attempt_all}</strong>
           </span>
           <Divider></Divider>
@@ -692,6 +698,7 @@ const LabaStud = () => {
 
       {notification && (
         <Notification
+          className="app-toast"
           success={notification.success}
           isExiting={isNotificationExiting}
         >

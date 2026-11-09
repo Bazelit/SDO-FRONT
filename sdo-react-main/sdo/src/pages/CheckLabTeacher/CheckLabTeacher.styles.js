@@ -185,6 +185,7 @@ export const StudentsLab = styled.div`
   margin-top: 16px;
   position: relative;
 
+  /* имя сверху, кнопки — строкой ниже */
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     padding: 12px 16px;
@@ -193,7 +194,7 @@ export const StudentsLab = styled.div`
   @media (max-width: 480px) {
     padding: 12px;
   }
-` 
+`
 
 export const StudentsLabText = styled.h1`
 font-family: Montserrat;
@@ -218,7 +219,7 @@ min-width: 0;
 export const StudentsLabtn = styled.button`
   background-color: #D9D9D9;
   border-radius: 4px;
-  border: none;    
+  border: none;
   outline: none;
   padding-top: 5px;
   padding-right: 12px;
@@ -265,7 +266,7 @@ align-items: center;
 justify-content: center;
 border-radius: 4px;
 opacity: 1;
-border: none;    
+border: none;
 outline: none;
 padding: 0;
 background-color: #D9D9D9;
@@ -280,7 +281,7 @@ export const StudentLabChange = styled.div`
   border-radius: 4px;
   opacity: 1;
   display: flex;
-  align-items: center;    
+  align-items: center;
   justify-content: center;
   font-family: Montserrat;
   font-weight: 400;
@@ -291,6 +292,7 @@ export const StudentLabChange = styled.div`
   background-color: #BECBEE;
   cursor: pointer;
 
+  /* вложенный блок «Оценка изменена» не должен раздувать родителя */
   & & {
     width: auto;
     background: none;

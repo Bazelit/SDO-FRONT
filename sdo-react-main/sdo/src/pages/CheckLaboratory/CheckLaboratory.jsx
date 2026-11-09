@@ -9,6 +9,16 @@ import { FaSearch } from "react-icons/fa";
 
 const Container = styled.div`
   padding: 0 200px;
+
+  @media (max-width: 1300px) {
+    padding: 0 40px;
+  }
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 0 12px;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -19,12 +29,51 @@ const SearchContainer = styled.div`
   align-items: center;
 
   margin-top: 20px;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  > div:last-child {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    > div:last-child {
+      flex: 1 1 100%;
+      gap: 12px;
+    }
+
+    > div:last-child select {
+      flex: 1 1 0;
+      min-width: 0;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    > div:last-child {
+      flex-direction: column;
+    }
+
+    > div:last-child select {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+  }
 `;
 
 const SearchInputContainer = styled.div`
   position: relative;
 
   width: 395px; // Ширина окна поиска
+
+  max-width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -61,7 +110,7 @@ const Select = styled.select`
   font-family: "Montserrat";
   height: 47px; // Высота для выпадающих списков
 
-  margin-left: 20px;
+  margin-left: 0;
 
   border: none;
 
