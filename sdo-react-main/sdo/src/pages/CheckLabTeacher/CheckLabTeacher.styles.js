@@ -6,8 +6,9 @@ export const container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 16px 20px 40px;
   color: var(--text, black);
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 24px 16px;
@@ -17,11 +18,28 @@ export const container = styled.div`
   }
 `
 
+export const TaskTitle = styled.p`
+  width: 100%;
+  max-width: 1253px;
+  margin: 0 0 22px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+`
+
 export const Description = styled.div`
   width: 100%;
   max-width: 1253px;
   background-color: var(--panel, #DDE5F8);
-  padding: 32px 32px;
+  padding: 28px 40px;
+  border-radius: 4px;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -32,39 +50,43 @@ export const Description = styled.div`
 `
 
 export const DescriptionText = styled.p`
-font-family: Montserrat;
-font-weight: 500;
- font-size: 20px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 10px;
 
   @media (max-width: 768px) {
-    font-size: 17px;
+    font-size: 15px;
   }
   @media (max-width: 480px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `
 
 export const DescriptionTextBold = styled.p`
-  font-size: 20px;
-  font-weight: bold;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 12px 0 8px;
 
   @media (max-width: 768px) {
-    font-size: 17px;
-    margin-bottom: 4px;
+    font-size: 15px;
   }
   @media (max-width: 480px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `
 
 export const DescriptionTest = styled.div`
   margin-top: 21px;
-
 `
 
 export const StudentList = styled.div`
    width: 100%;
    max-width: 1252px;
+   margin-top: 12px;
 `
 export const StudentListUp = styled.div`
   display: flex;
@@ -74,19 +96,23 @@ export const StudentListUp = styled.div`
 `
 
 export const StudentListH1 = styled.h1`
-   font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-weight: 500;
-  font-style: Medium;
-  font-size: 20px;
-  leading-trim: NONE;
+  font-size: 18px;
   line-height: 27px;
-  letter-spacing: 0%;
-  margin-left: 32px;
+  margin: 0 0 8px;
 
   @media (max-width: 768px) {
-    margin-left: 0;
     font-size: 18px;
   }
+`
+
+export const GroupTitle = styled.h2`
+  margin: 18px 0 6px;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
 `
 
 export const SearchInputContainer = styled.div`
@@ -103,11 +129,11 @@ export const SearchInput = styled.input`
   padding: 0 40px;
   width: 100%;
   font-family: "Montserrat";
-  height: 47px;
+  height: 40px;
   box-sizing: border-box;
   background-color: var(--field, #f0f0f0);
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   outline: none;
   font-size: 16px;
   color: var(--text, #000);
@@ -149,14 +175,14 @@ width: 231px;
     text-overflow: ellipsis;
     font-family: "Montserrat";
     cursor: pointer;
-    height: 47px;
+    height: 40px;
     border: none;
     background-color: var(--field, #f0f0f0);
     padding: 0 10px;
     font-size: 16px;
     color: var(--text, #000);
     text-align: center;
-    border-radius: 8px;
+    border-radius: 4px;
     box-sizing: border-box;
     &:focus {
       outline: none;

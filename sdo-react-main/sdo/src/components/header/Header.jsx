@@ -20,7 +20,7 @@ const HeaderWrapper = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   max-width: ${({ $maxWidth }) => $maxWidth || "1440px"};
-  padding: ${({ $padding }) => $padding || "12px 40px 0 60px"};
+  padding: ${({ $padding }) => $padding || "12px 40px 12px 60px"};
 
   img {
     display: block;
@@ -32,10 +32,10 @@ const HeaderWrapper = styled.div`
   /* на ширине меньше контейнера страницы добавляем боковые отступы,
      чтобы логотип и кнопки не прилипали к краям экрана */
   @media (max-width: 1300px) {
-    padding: 12px 20px 0;
+    padding: 12px 20px 12px 20px;
   }
   @media (max-width: 768px) {
-    padding: 10px 16px 0;
+    padding: 10px 16px 12px 16px;
   }
   @media (max-width: 600px) {
     padding: 8px 16px;
@@ -187,14 +187,14 @@ const ButtonEx = styled.button`
 `;
 
 const PAGE_CONFIG = {
-  "/personalteacher": { maxWidth: "1140px", padding: "12px 0 0 0" },
-  "/personalstud":    { maxWidth: "1030px", padding: "12px 0 0 0" },
-  "/laboratory":      { maxWidth: "1236px", padding: "12px 0 0 0" },
-  "/studlaboratory":  { maxWidth: "1270px", padding: "12px 0 0 0" },
-  "/laboratoryadd":   { maxWidth: "1248px", padding: "12px 0 0 0" },
-  "/prepodredlab":    { maxWidth: "1248px", padding: "12px 0 0 0" },
-  "/checklabteacher": { maxWidth: "1248px", padding: "12px 0 0 0" },
-  default:            { maxWidth: "1440px", padding: "12px 40px 0 60px" },
+  "/personalteacher": { maxWidth: "1140px", padding: "12px 0 12px 0" },
+  "/personalstud":    { maxWidth: "1030px", padding: "12px 0 12px 0" },
+  "/laboratory":      { maxWidth: "1236px", padding: "12px 0 12px 0" },
+  "/studlaboratory":  { maxWidth: "1270px", padding: "12px 0 12px 0" },
+  "/laboratoryadd":   { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  "/prepodredlab":    { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  "/checklabteacher": { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  default:            { maxWidth: "1440px", padding: "12px 40px 12px 60px" },
 };
 
 const getPageConfig = (pathname) => {

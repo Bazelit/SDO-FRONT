@@ -57,6 +57,7 @@ export const DescriptionTextBold = styled.p`
 
 export const DescriptionTest = styled.div`
   margin-top: 21px;
+  font-family: Montserrat, sans-serif;
 `
 
 
