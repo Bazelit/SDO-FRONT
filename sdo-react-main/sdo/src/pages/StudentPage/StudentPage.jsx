@@ -8,7 +8,7 @@ import axios from "axios";
 
 const SectionLab = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--page, #fff);
   font-family: "Montserrat", sans-serif;
   display: flex;
   gap: 100px;
@@ -39,7 +39,7 @@ const List = styled.div`
   width: 350px;
   max-width: 100%;
   padding: 20px;
-  background-color: #BECBEE;
+  background-color: var(--panel, #BECBEE);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ const ListSubject = styled.div`
   max-width: 100%;
   min-height: 60px;
   padding: 12px 25px;
-  background-color: ${props => props.$isCompleted ? "#4CAF50" : "#fff"};
+  background-color: ${props => props.$isCompleted ? "#4CAF50" : "var(--surface, #fff)"};
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -75,7 +75,7 @@ const BigList = styled.div`
   width: 100%;
   max-width: 700px;
   padding: 40px;
-  background-color: #E6F4CF;
+  background-color: var(--panel, #E6F4CF);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@ const Text = styled.p`
   font-size: 18px;
   margin: 0; 
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 `;
 
 const TextDiscipline = styled.p`
@@ -101,7 +101,7 @@ const TextDiscipline = styled.p`
   font-size: 16px;
   margin: 0;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 `;
 
 const InfoText = styled.p`
@@ -109,7 +109,7 @@ const InfoText = styled.p`
   font-size: 16px;
   font-weight: 600;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 `;
 
 const RowBlocks = styled.div`
@@ -209,7 +209,7 @@ export default function StudentPage() {
                 <BigList>
                     <Text>Список лабораторных работ студента:</Text>
                     {labs.map(([labId, labName, isCompleted]) => (
-                        <ListSubject style={{ color: "black" }}
+                        <ListSubject style={{ color: "var(--text, black)" }}
                             key={labId}
                             $isCompleted={isCompleted}
                             onClick = {() => navigate(`/seeresultstudent/${labId}/${id}`)}

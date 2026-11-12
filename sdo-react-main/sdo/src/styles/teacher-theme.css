@@ -1,0 +1,65 @@
+/* Palette from the teacher screens in the supplied Figma file.
+   Component fallbacks preserve the existing light palette. */
+:root[data-teacher-theme="dark"] {
+  color-scheme: dark;
+  --page: #1d2d44;
+  --text: #fff;
+  --text-secondary: #d9d9d9;
+  --panel: #3a496e;
+  --surface: #738cab;
+  --field: #738cab;
+  --accent: #738cab;
+  --accent-hover: #3a496e;
+  --badge: #424451;
+  --form-button: #424451;
+  --border: #738cab;
+  --chrome: #0d1321;
+  --header-button: #1d2d44;
+  --mobile-nav: #424451;
+  --mobile-nav-text: #dde5f8;
+  --mobile-nav-active: #3a496e;
+  --discipline-card: #3a496e;
+  --placeholder: #d9d9d9;
+  --select-arrow: url("../img/theme/chevron-dark.svg");
+}
+
+body {
+  background-color: var(--page, #fff);
+  color: var(--text, #000);
+}
+
+:root[data-teacher-theme="dark"] input,
+:root[data-teacher-theme="dark"] textarea,
+:root[data-teacher-theme="dark"] select,
+:root[data-teacher-theme="dark"] button {
+  color: var(--text);
+}
+
+:root[data-teacher-theme="dark"] input,
+:root[data-teacher-theme="dark"] textarea,
+:root[data-teacher-theme="dark"] select {
+  background-color: var(--field);
+  border-color: var(--border);
+}
+
+:root[data-teacher-theme="dark"] ::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+:root[data-teacher-theme="dark"] :focus-visible {
+  outline: 2px solid #dde5f8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  :root[data-teacher-theme="dark"] {
+    --page: #2c3e57;
+    --chrome: #20293f;
+    --discipline-card: #738cab;
+  }
+  :root[data-teacher-theme="dark"] body.has-mobile-nav {
+    --mobile-nav-h: 82px;
+  }
+}
+

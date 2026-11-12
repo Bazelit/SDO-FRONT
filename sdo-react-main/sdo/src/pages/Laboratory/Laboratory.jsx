@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
+import ThemedSearchIcon from "../../components/ThemedSearchIcon";
 import {
   getStudentsLabs,
   deleteLab,
@@ -37,10 +37,10 @@ const Select = styled.select`
   height: 47px;
   margin-left: 20px;
   border: none;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   padding: 0;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   text-align: center;
   border-radius: 8px;
   &:focus {
@@ -66,7 +66,7 @@ const SectionLab = styled.div`
     width: 395px;
     height: 26px;
     padding: 10px;
-    background: #f0f0f0;
+    background: var(--field, #f0f0f0);
     border-style: none;
     border-radius: 4px;
     font-size: 16px;
@@ -86,11 +86,11 @@ const SectionLab = styled.div`
     padding: 10px;
     border-radius: 4px;
     text-align: center;
-    color: #000;
+    color: var(--text, #000);
     font-family: "Montserrat";
     line-height: 27px;
     text-decoration: none;
-    background: #DDE5F8;
+    background: var(--panel, #DDE5F8);
     border-style: none;
     border-radius: 4px;
     box-sizing: border-box;
@@ -104,35 +104,35 @@ const SectionLab = styled.div`
     padding: 10px;
     border-radius: 4px;
     text-align: center;
-    color: #000;
+    color: var(--text, #000);
     font-family: "Montserrat";
     line-height: 27px;
     text-decoration: none;
-    background: #f0f0f0;
+    background: var(--field, #f0f0f0);
     border-style: none;
     border-radius: 4px;
     box-sizing: border-box;
   }
 
   .section__lab-button:hover {
-    background: #c8d5f6;
+    background: var(--accent, #c8d5f6);
     color: #fff;
     border-style: none;
     transition: 0.5s;
   }
   .section__groups-button:hover {
-    background: #c8d5f6;
+    background: var(--accent, #c8d5f6);
     color: #fff;
     border-style: none;
     transition: 0.5s;
   }
 
   .base-color{ 
-    background:#E6F4Cf; // Убрать, если окажется, что все section__lab-page должны быть с этим цветом
+    background:var(--panel, #E6F4Cf); // Убрать, если окажется, что все section__lab-page должны быть с этим цветом
   }
 
   .alternate-color {
-    background: rgba(216, 216, 216, 0.38);
+    background: var(--panel, rgba(216, 216, 216, 0.38));
   }
 
   .section__login-formSelect {
@@ -141,17 +141,17 @@ const SectionLab = styled.div`
     cursor: pointer;
     height: 47px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: var(--field, #f0f0f0);
     padding: 0 35px 0 10px;
     font-size: 16px;
-    color: #000;
+    color: var(--text, #000);
     text-align: center;
     border-radius: 8px;
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: var(--select-arrow, url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"));
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 14px;
@@ -212,7 +212,7 @@ const SectionLab = styled.div`
 `;
 
 const NameLab = styled.p`
-  color: #000;
+  color: var(--text, #000);
   margin-left: 20px;
   text-align: left;
   font-weight: bold;
@@ -280,7 +280,7 @@ const ListLab = styled.ul`
 const ButtonDelete = styled.button`
   padding: 10px;
   width: 180px;
-  background-color: white;
+  background-color: var(--surface, white);
   display: flex;
   border-radius: 5px;
   justify-content: center;
@@ -288,7 +288,7 @@ const ButtonDelete = styled.button`
   cursor: pointer;
   font-family: "Montserrat";
   font-size: 16px;
-  border: 0px solid #000;
+  border: 0px solid var(--text, #000);
   box-sizing: border-box;
   flex-shrink: 0;
 
@@ -326,9 +326,9 @@ const SpnLab = styled.span`
     padding: 10px;
     margin: 0;
     width: 180px;
-    background-color: white;
-    color: #000;
-    border: 0px solid #000;
+    background-color: var(--surface, white);
+    color: var(--text, #000);
+    border: 0px solid var(--text, #000);
     display: flex;
     border-radius: 5px;
     align-items: center;
@@ -344,7 +344,7 @@ const SpnLab = styled.span`
   }
 
   .section__lab-edit:hover {
-    background: #c8d5f6;
+    background: var(--accent, #c8d5f6);
     color: #fff;
     border-style: none;
   }
@@ -394,8 +394,8 @@ const PublishButton = styled.button`
   padding: 10px;
   height: 39px;
   border-radius: 4px;
-  background-color: #becbee;
-  color: #000;
+  background-color: var(--accent, #becbee);
+  color: var(--text, #000);
   border: none;
   cursor: pointer;
   font-family: "Montserrat";
@@ -412,7 +412,7 @@ const PublishButton = styled.button`
   text-overflow: ellipsis;
 
   &:hover {
-    background-color: #a3c8d1;
+    background-color: var(--accent-hover, #a3c8d1);
     transition: 0.3s;
   }
 
@@ -439,24 +439,24 @@ const SearchInput = styled.input`
   font-family: "Montserrat";
   height: 47px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
   border-radius: 8px;
   outline: none;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   padding-left: 8px;
   &:focus {
     outline: none;
   }
 `;
-const SearchIcon = styled(FaSearch)`
+const SearchIcon = styled(ThemedSearchIcon)`
   position: absolute;
   right: 15px;
   font-family: "Montserrat";
   top: 50%;
   transform: translateY(-50%);
-  color: #000;
+  color: var(--text, #000);
   cursor: pointer;
 `;
 const SearchContainer = styled.div`
@@ -551,7 +551,7 @@ const TextStyle = styled.p`
   font-size: 18px;
   margin: 0;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
   padding: 20px;
   border-radius: 7px;
   display: flex;
@@ -848,7 +848,7 @@ const Laboratory = () => {
                         to={`/PrepodRedLab/${item.id}`}
                         className="section__lab-edit"
                         style = {{
-                          backgroundColor: "#D9D9D9",
+                          backgroundColor: "var(--badge, #D9D9D9)",
                         }}
                       >
                         Редактировать
@@ -864,7 +864,7 @@ const Laboratory = () => {
                       <ButtonDelete
                         onClick={() => handleDeleteClick(item.id, index)}
                         style ={{
-                          backgroundColor:"#D9D9D9",
+                          backgroundColor:"var(--badge, #D9D9D9)",
                         }}
                       >
                         Удалить
@@ -873,8 +873,8 @@ const Laboratory = () => {
                     {item.status === "published" ? (
                       <PublishButton
                         style={{
-                          backgroundColor: "#D9D9D9",
-                          color: "#000",
+                          backgroundColor: "var(--badge, #D9D9D9)",
+                          color: "var(--text, #000)",
                         }}
                         onClick={() =>
                           handleUpdateStatusLabClick(item.id, index)

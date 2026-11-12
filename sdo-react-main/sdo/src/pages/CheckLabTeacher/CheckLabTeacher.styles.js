@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaSearch } from "react-icons/fa";
+import ThemedSearchIcon from "../../components/ThemedSearchIcon";
 
 export const container = styled.div`
   width: 100%;
@@ -7,7 +7,7 @@ export const container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  color: black;
+  color: var(--text, black);
 
   @media (max-width: 768px) {
     padding: 24px 16px;
@@ -20,7 +20,7 @@ export const container = styled.div`
 export const Description = styled.div`
   width: 100%;
   max-width: 1253px;
-  background-color: #DDE5F8;
+  background-color: var(--panel, #DDE5F8);
   padding: 32px 32px;
 
   @media (max-width: 768px) {
@@ -105,12 +105,12 @@ export const SearchInput = styled.input`
   font-family: "Montserrat";
   height: 47px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
   border-radius: 8px;
   outline: none;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   text-align: center;
   &:focus {
     outline: none;
@@ -151,10 +151,10 @@ width: 231px;
     cursor: pointer;
     height: 47px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: var(--field, #f0f0f0);
     padding: 0 10px;
     font-size: 16px;
-    color: #000;
+    color: var(--text, #000);
     text-align: center;
     border-radius: 8px;
     box-sizing: border-box;
@@ -162,13 +162,13 @@ width: 231px;
       outline: none;
     }
 `
-export const SearchIcon = styled(FaSearch)`
+export const SearchIcon = styled(ThemedSearchIcon)`
   position: absolute;
   right: 15px;
   font-family: "Montserrat";
   top: 50%;
   transform: translateY(-50%);
-  color: #000;
+  color: var(--text, #000);
   cursor: pointer;
   pointer-events: none;
 `
@@ -217,7 +217,7 @@ min-width: 0;
 `
 
 export const StudentsLabtn = styled.button`
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   border-radius: 4px;
   border: none;    
   outline: none;
@@ -240,7 +240,7 @@ export const StudentsLabtn = styled.button`
 `
 
 export const StudentLabResult = styled.div`
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   color: ${(props) => props.$color};
   font-family: Montserrat;
   font-weight: 600;
@@ -269,7 +269,7 @@ opacity: 1;
 border: none;    
 outline: none;
 padding: 0;
-background-color: #D9D9D9;
+background-color: var(--badge, #D9D9D9);
 cursor:pointer;
 `
 
@@ -289,7 +289,7 @@ export const StudentLabChange = styled.div`
   line-height: 27px;
   letter-spacing: 0%;
   text-align: center;
-  background-color: #BECBEE;
+  background-color: var(--accent, #BECBEE);
   cursor: pointer;
 
   /* вложенный блок «Оценка изменена» не должен раздувать родителя */
@@ -312,7 +312,7 @@ export const BtnSave = styled.button`
   opacity: 1;
   border-radius: 4px;
   border: none;
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   font-family: Montserrat;
   font-weight: 400;
   font-style: Regular;
@@ -428,7 +428,7 @@ export const ErrorNotification = styled.div`
 `;
 
 export const LimitBlock = styled.div`
-    background-color:#F0F0F0;
+    background-color:var(--field, #F0F0F0);
     margin-top: 20px;
     padding: 32px 32px;
     border-radius: 4px;

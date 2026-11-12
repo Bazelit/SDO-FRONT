@@ -14,6 +14,7 @@ import Attempts from "../../pages/Attempts/index";
 import ScrollToTop from "../../components/ScrollToTop";
 import CheckLaboratory from "../../pages/CheckLaboratory/CheckLaboratory";
 import Groups from "../../pages/Groups/Groups";
+import TeacherGroups from "../../pages/Groups/GroupList";
 import Disciplines from "../../pages/Disciplines/Disciplines";
 import DisciplinesStud from "../../pages/DisciplinesStud/DisciplinesStud";
 import TestLabs from "../../pages/TestLabs/TestLabs";
@@ -82,6 +83,14 @@ const MainRouter = ({ setIsLoggedIn }) => {
           element={
             <ProtectedRoute allowedRoles={["teacher"]}>
               <CheckLaboratory />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/groups"
+          element={
+            <ProtectedRoute allowedRoles={["teacher"]}>
+              <TeacherGroups />
             </ProtectedRoute>
           }
         />

@@ -5,10 +5,12 @@ import Bread from "../BreadCrumbs";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IoLogOutOutline } from "react-icons/io5";
+import { useTeacherTheme } from "../ThemeContext";
+import logoDarkDesktop from "../../img/theme/logo-dark-desktop.png";
 
 const HeaderStyle = styled.header`
   width: 100%;
-  background-color: #c8d5f6;
+  background-color: var(--chrome, #c8d5f6);
 `;
 
 const HeaderWrapper = styled.div`
@@ -48,6 +50,16 @@ const HeaderWrapper = styled.div`
   @media (max-width: 570px) { img { height: 42px; } }
   @media (max-width: 480px) { img { height: 38px; } }
   @media (max-width: 400px) { img { height: 36px; } }
+
+  .logo-dark {
+    width: 232px;
+    height: 56px;
+    object-fit: contain;
+  }
+  @media (max-width: 600px) {
+    &:has(.logo-dark) { padding: 15px 24px; gap: 12px; }
+    .logo-dark { width: 138px; height: 50px; object-fit: cover; }
+  }
 `;
 
 const Nav = styled.nav`
@@ -60,12 +72,12 @@ const Nav = styled.nav`
   min-width: 0;
 
   .header__nav-lr {
-    color: #415588;
+    color: var(--text, #415588);
     text-decoration: none;
     font-size: 16px;
     font-family: "Montserrat";
     line-height: 1.5;
-    background-color: #fff;
+    background-color: var(--header-button, #fff);
     width: 232px;
     height: 36px;
     border-radius: 7px;
@@ -83,7 +95,7 @@ const Nav = styled.nav`
 
   .header__nav-lr:hover {
     color: #fff;
-    background-color: #dde5f9;
+    background-color: var(--accent-hover, #dde5f9);
     transform: translateY(-1px);
   }
 
@@ -123,11 +135,11 @@ const Nav = styled.nav`
 `;
 
 const ButtonEx = styled.button`
-  color: #415588;
+  color: var(--text, #415588);
   font-size: 16px;
   font-family: "Montserrat";
   line-height: 1.5;
-  background-color: #fff;
+  background-color: var(--header-button, #fff);
   width: 232px;
   height: 36px;
   border-radius: 7px;
@@ -146,7 +158,7 @@ const ButtonEx = styled.button`
 
   &:hover {
     color: #fff;
-    background-color: #dde5f9;
+    background-color: var(--accent-hover, #dde5f9);
     transform: translateY(-1px);
   }
 
@@ -209,6 +221,7 @@ const getPageConfig = (pathname) => {
 };
 
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
+  const { theme } = useTeacherTheme();
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -246,7 +259,9 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
         <HeaderWrapper $maxWidth={config.maxWidth} $padding={config.padding}>
           <div>
             <Link to="/">
-              <img src={logo} alt="логотип" />
+              {theme === "dark" ? (
+                <img className="logo-dark" src={logoDarkDesktop} alt="Московский Политех" />
+              ) : <img src={logo} alt="Московский Политех" />}
             </Link>
           </div>
           <Nav>

@@ -47,7 +47,7 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
     }
 
     return (
-        <S.StudentsLab $color={isSubmitted ? (score > 60 ? "#E6F4CF" : "#F9DFDF8C") : "#F0F0F0"}>
+        <S.StudentsLab $color={isSubmitted ? (score > 60 ? "var(--panel, #E6F4CF)" : "var(--panel, #F9DFDF8C)") : "var(--field, #F0F0F0)"}>
             <S.StudentsLabText>
                 {name}
             </S.StudentsLabText>

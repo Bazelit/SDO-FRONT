@@ -1,99 +1,54 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledContainer = styled.div`
-  background-color: #e6f4cf;
-
-  font-family: "Montserrat";
-
+const Card = styled(Link)`
+  min-width: 0;
+  min-height: 104px;
+  height: 100%;
   width: 100%;
-
-  max-width: 1480px;
-
-  height: 100px;
-
-  padding: 0 20px;
-
+  padding: 24px 32px;
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
-  margin: 30px auto;
-
-  gap: 12px;
-
-  @media (max-width: 480px) {
-    height: auto;
-    min-height: 100px;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    padding: 16px;
-    margin: 16px auto;
-  }
-
-  transition: background-color 0.3s;
-
+  gap: 16px;
   border-radius: 7px;
-`;
-
-const GroupContent = styled.div`
-  display: flex;
-
-  align-items: center;
-`;
-
-const GroupNumber = styled.div`
-  font-weight: normal;
-
-  font-size: 20px;
-
-  margin-right: 10px;
-`;
-
-const ChangeButton = styled.button`
-  font-weight: normal;
-
-  font-size: 16px;
-
-  background-color: #D9D9D9;
-
-  color: white;
-
-  border: none;
-
-  font-family: "Montserrat";
-
-  border-radius: 5px;
-
-  cursor: pointer;
-
-  height: 42px;
-
-  padding: 0 15px;
-
-  &:hover {
-    background-color: #BECBEE;
+  background: ${({ $alternate }) => $alternate ? "var(--panel, #f0f0f0)" : "var(--panel, #e6f4cf)"};
+  color: var(--text, #000);
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  .group-number { min-width: 0; overflow-wrap: anywhere; font-size: 20px; line-height: 27px; }
+  .group-action {
+    flex-shrink: 0;
+    min-width: 221px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    background: var(--accent, #becbee);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+  }
+  &:hover { box-shadow: inset 0 0 0 2px var(--border, #becbee); }
+  &:focus-visible { outline: 2px solid var(--border, #415588); outline-offset: 3px; }
+  @media (max-width: 600px) {
+    min-height: 86px;
+    padding: 12px;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--discipline-card, #e6f4cf);
+    .group-number { font-size: 16px; font-weight: 600; text-align: center; }
+    .group-action { display: none; }
   }
 `;
 
-const GroupWindow = ({ groupNumber }) => {
-  const handleButtonClick = () => {
-    console.log(`Переход к группе: ${groupNumber}`);
-  };
-
+export default function GroupWindow({ groupId, groupNumber, alternate = false }) {
   return (
-    <StyledContainer>
-      <GroupContent>
-        <GroupNumber>{groupNumber}</GroupNumber>
-      </GroupContent>
-
-      <ChangeButton onClick={handleButtonClick}>Перейти к группе</ChangeButton>
-    </StyledContainer>
+    <Card to={`/groups/${encodeURIComponent(groupId)}`} $alternate={alternate}
+      aria-label={`Перейти к группе ${groupNumber}`}>
+      <span className="group-number">{groupNumber}</span>
+      <span className="group-action" aria-hidden="true">Перейти к группе</span>
+    </Card>
   );
-};
-
-export default GroupWindow;
+}

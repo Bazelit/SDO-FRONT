@@ -33,7 +33,7 @@ const Grade = styled.span`
 
   margin: 0 10px; /* Отступы вокруг текста оценки */
 
-  background-color: #d9d9d9; /* Фоновый цвет для оценки */
+  background-color: var(--badge, #d9d9d9); /* Фоновый цвет для оценки */
 
   padding: 10px 20px; /* Увеличенные отступы внутри элемента оценки */
 
