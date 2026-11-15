@@ -4,6 +4,10 @@ export function getUserStatus() {
     return appApiIns.get('/api/user_status');
 }
 
+export function getStudentStats() {
+    return appApiIns.get('/api/student/stats');
+}
+
 export function getUserData() {
     return appApiIns.get('/api/user_data');
 }
