@@ -22,7 +22,7 @@ const Section = styled.section`
     }
 `;
 const SectionHead = styled.h1`
-    color: #000;
+    color: var(--text, #000);
     font-family: 'Montserrat';
     font-size: 30px;
     font-weight: 500;
@@ -44,12 +44,12 @@ const Block = styled.div`
       font-size: 24px;
       cursor: pointer;
       text-decoration: none;
-      color: #000;
+      color: var(--text, #000);
       border-radius: 7px;
-      background: #E2EDD0;
+      background: var(--panel, #E2EDD0);
     }
     .section__block-btn:hover{
-        background: #C8D5F6;
+        background: var(--accent, #C8D5F6);
         color: #FFF;
         transition: 0.3s;
     }

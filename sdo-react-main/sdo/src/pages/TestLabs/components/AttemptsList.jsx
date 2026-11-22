@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ListContainer = styled.div`
-  background-color: #BECBEE;
+  background-color: var(--accent, #BECBEE);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -22,7 +22,7 @@ const AttemptRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   padding: 20px;
   border-radius: 8px;
   gap: 12px;

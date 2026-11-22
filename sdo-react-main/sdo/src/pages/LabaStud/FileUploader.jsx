@@ -13,14 +13,14 @@ const Inpt = styled.input`
 `;
 
 const Label = styled.label`
-  border: 2px dashed #000;
+  border: 2px dashed var(--text, #000);
   height: 200px;
   text-align: center;
   border-radius: 7px;
   margin-top: 10px;
   width: 100%;
   transition: background-color 0.3s;
-  background-color: #FFFFFF;
+  background-color: var(--surface, #FFFFFF);
   cursor: pointer;
   padding: 0 12px;
   overflow-wrap: anywhere;
@@ -30,7 +30,7 @@ const Label = styled.label`
   }
 
   &:hover {
-    background-color: #E2EDD08C;
+    background-color: var(--panel, #E2EDD08C);
   }
 `;
 
@@ -40,7 +40,7 @@ const Span = styled.span`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: ${({ isDragging }) => (isDragging ? '#F5F5F5' : 'transparent')};
+  background-color: ${({ isDragging }) => (isDragging ? 'var(--accent-hover, #F5F5F5)' : 'transparent')};
   transition: background-color 0.3s ease;
 `;
 

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { useTeacherTheme } from "../ThemeContext";
+import { useTheme } from "../ThemeContext";
 
-const Section = styled.div`
+const Section = styled.footer`
   font-family: "Montserrat", sans-serif;
   background-color: var(--chrome, #c8d5f6);
   width: 100%;    
@@ -55,22 +55,20 @@ const ThemeButton = styled.button`
 `;
 
 const Footer = () => {
-  const { theme, canToggleTheme, toggleTheme } = useTeacherTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <Section>
       <p>© 2026 Все права защищены</p>
-      {canToggleTheme && (
-        <ThemeButton
-          type="button"
-          onClick={toggleTheme}
-          aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
-          aria-pressed={theme === "dark"}
-          title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}
-        >
-          {theme === "dark" ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
-        </ThemeButton>
-      )}
+      <ThemeButton
+        type="button"
+        onClick={toggleTheme}
+        aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
+        aria-pressed={theme === "dark"}
+        title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}
+      >
+        {theme === "dark" ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+      </ThemeButton>
     </Section>
   );
 };

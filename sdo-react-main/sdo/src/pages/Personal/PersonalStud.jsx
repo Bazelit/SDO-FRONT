@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const SectionLab = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--page, #fff);
   font-family: "Montserrat", sans-serif;
   display: flex;
   gap: 100px;
@@ -46,7 +46,7 @@ const SectionLab = styled.div`
 const List = styled.div`
   width: 350px;
   padding: 20px;
-  background-color: #BECBEE;
+  background-color: var(--accent, #BECBEE);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ const ListSubject = styled.div`
   height: 100%;
   max-height: 30px;
   padding: 15px 25px;
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -96,7 +96,7 @@ const ListSubject = styled.div`
   margin-bottom: 10px;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: var(--accent-hover, #f0f0f0);
   }
 
   @media (max-width: 1024px) {
@@ -133,7 +133,7 @@ const BigList = styled.div`
   width: 100%;
   max-width: 700px;
   padding: 40px;
-  background-color: #E6F4CF;
+  background-color: var(--panel, #E6F4CF);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -178,7 +178,7 @@ const Text = styled.p`
   font-size: 18px;
   margin: 0; 
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 
   @media (max-width: 1024px) {
     font-size: 17px;
@@ -202,7 +202,7 @@ const TextDiscipline = styled.p`
   font-size: 16px;
   margin: 0;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 
   @media (max-width: 768px) {
     font-size: 15px;
@@ -218,7 +218,7 @@ const InfoText = styled.p`
   font-size: 16px;
   font-weight: 600;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 
   @media (max-width: 768px) {
     font-size: 15px;

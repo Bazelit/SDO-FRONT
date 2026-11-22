@@ -5,7 +5,7 @@ import AttemptsList from './components/AttemptsList';
 import NavigationButtons from './components/NavigationButtons';
 
 const PageContainer = styled.div`
-  background-color: #fff;
+  background-color: var(--page, #fff);
   font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;

@@ -3,7 +3,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider, setLogger } from "react-query";
 import MainRouter from "../../app/routing";
-import { TeacherThemeProvider } from "../../components/ThemeContext";
+import { ThemeProvider } from "../../components/ThemeContext";
 import { getGroups, getSubjects, getStudentsByGroup } from "../../api/teacher-api";
 import { getUserData } from "../../api/user-api";
 
@@ -28,9 +28,9 @@ function mount(path = "/PersonalTeacher") {
   return render(
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <TeacherThemeProvider isLoggedIn={Boolean(localStorage.getItem("access_token"))}>
+        <ThemeProvider>
           <MainRouter setIsLoggedIn={() => {}} />
-        </TeacherThemeProvider>
+        </ThemeProvider>
       </MemoryRouter>
     </QueryClientProvider>
   );
@@ -127,7 +127,7 @@ test("keeps the teacher dark theme on both group pages", async () => {
   mount("/groups");
   fireEvent.click(await screen.findByRole("link", { name: "Перейти к группе 221-376" }));
   await screen.findByRole("list", { name: "Список студентов" });
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
+  expect(document.documentElement.dataset.theme).toBe("dark");
 });
 
 test("reports a malformed groups response instead of crashing", async () => {

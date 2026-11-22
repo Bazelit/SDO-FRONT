@@ -87,14 +87,14 @@ const Ul = styled.ul`
   }
   .link__bread {
     text-decoration: none;
-    color: #000;
+    color: var(--text, #000);
     font-family: "Montserrat";
     font-size: 16px;
   }
   .breadcrumb-last {
     font-weight: normal;
     text-decoration: none;
-    color: #000;
+    color: var(--text, #000);
   }
 `;
 

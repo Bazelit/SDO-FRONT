@@ -12,7 +12,7 @@ const StyledContainer = styled.div`
   align-items: center;
   margin: 20px 0;
   transition: background-color 0.3s;
-  background-color: ${({ allPassed }) => (allPassed ? "var(--panel, #EFF5E5)" : "var(--panel, #F9DFDF)")};
+  background-color: ${({ allPassed }) => (allPassed ? "var(--success-panel, #EFF5E5)" : "var(--danger-panel, #F9DFDF)")};
   gap: 12px;
 
   @media (max-width: 768px) {

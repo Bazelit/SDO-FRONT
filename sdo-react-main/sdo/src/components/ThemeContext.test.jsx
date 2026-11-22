@@ -1,127 +1,152 @@
 import React from "react";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Link } from "react-router-dom";
-import { TeacherThemeProvider, useTeacherTheme } from "./ThemeContext";
+import { ThemeProvider, useTheme } from "./ThemeContext";
 import Footer from "./Footer/Footer";
+import FooterMobile from "./Footer/FooterMobile";
 
-function Controls() {
-  const { theme } = useTeacherTheme();
+function Controls({ loggedIn }) {
+  const { theme } = useTheme();
   return <>
-    <output aria-label="Тема">{theme}</output>
+    <output aria-label="Theme">{theme}</output>
+    <FooterMobile isLoggedIn={loggedIn} />
     <Footer />
-    <Link to="/LaboratoryAdd">Создать лабораторную</Link>
-    <Link to="/login">Авторизация</Link>
+    <Link to="/LaboratoryAdd">Add laboratory</Link>
+    <Link to="/login">Login</Link>
+    <Link to="/PersonalStud">Student profile</Link>
   </>;
 }
 
-function mount(path = "/PersonalTeacher", isLoggedIn = true) {
+function mount(path = "/", loggedIn = false) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <TeacherThemeProvider isLoggedIn={isLoggedIn}><Controls /></TeacherThemeProvider>
+      <ThemeProvider><Controls loggedIn={loggedIn} /></ThemeProvider>
     </MemoryRouter>
   );
 }
 
-let viewport;
-let viewportListeners;
-
-function resizeTo(width) {
-  act(() => {
-    viewport.matches = width > 600;
-    viewportListeners.forEach(listener => listener({ matches: viewport.matches }));
-  });
+function toggle() {
+  fireEvent.click(within(screen.getByRole("contentinfo")).getByRole("button"));
 }
 
 beforeEach(() => {
-  viewportListeners = new Set();
-  viewport = {
-    matches: true,
-    addEventListener: (event, listener) => viewportListeners.add(listener),
-    removeEventListener: (event, listener) => viewportListeners.delete(listener),
-  };
-  window.matchMedia = jest.fn(() => viewport);
   localStorage.clear();
-  localStorage.setItem("role", "teacher");
+  delete document.documentElement.dataset.theme;
 });
 
-test("switches both ways and restores the saved theme after remount", () => {
+afterEach(() => jest.restoreAllMocks());
+
+test("switches from the footer and restores the saved theme after remount", () => {
   const first = mount();
-  fireEvent.click(screen.getByRole("button", { name: /Включить .* тему/ }));
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-  expect(localStorage.getItem("teacher-theme")).toBe("dark");
+  expect(screen.getByLabelText("Theme").textContent).toBe("light");
+  toggle();
+  expect(document.documentElement.dataset.theme).toBe("dark");
+  expect(localStorage.getItem("site-theme")).toBe("dark");
+  expect(within(screen.getByRole("contentinfo")).getByRole("button").getAttribute("aria-pressed")).toBe("true");
   first.unmount();
   mount();
-  expect(screen.getByLabelText("Тема").textContent).toBe("dark");
-  fireEvent.click(screen.getByRole("button", { name: /Включить .* тему/ }));
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
-  expect(localStorage.getItem("teacher-theme")).toBe("light");
-});
-
-test("keeps dark mode between teacher pages and resets it on the login page", () => {
-  localStorage.setItem("teacher-theme", "dark");
-  mount("/Disciplines");
-  fireEvent.click(screen.getByText("Создать лабораторную"));
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-  fireEvent.click(screen.getByText("Авторизация"));
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
-  expect(screen.queryByRole("button", { name: /Включить .* тему/ })).toBeNull();
+  expect(screen.getByLabelText("Theme").textContent).toBe("dark");
+  toggle();
+  expect(document.documentElement.dataset.theme).toBe("light");
+  expect(localStorage.getItem("site-theme")).toBe("light");
 });
 
 test.each([
-  "/PersonalTeacher", "/disciplines", "/Laboratory/1", "/LaboratoryAdd",
-  "/PrepodRedLab/1", "/groups/1", "/student/1", "/checkLaboratory",
-  "/checklabteacher/1", "/seeresultstudent/1/1",
-])("applies the saved theme to %s", (path) => {
-  localStorage.setItem("teacher-theme", "dark");
-  mount(path);
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
+  ["/", null], ["/login", null], ["/registration", null],
+  ["/PersonalStud", "student"], ["/StudLaboratory", "student"],
+  ["/disciplinesStud", "student"], ["/LabaStud/1", "student"],
+  ["/attempts", "student"], ["/testLabs", "student"],
+  ["/PersonalTeacher", "teacher"], ["/disciplines", "teacher"],
+  ["/Laboratory/1", "teacher"], ["/LaboratoryAdd", "teacher"],
+  ["/PrepodRedLab/1", "teacher"], ["/groups/1", "teacher"],
+  ["/student/1", "teacher"], ["/checkLaboratory", "teacher"],
+  ["/checklabteacher/1", "teacher"], ["/seeresultstudent/1/1", "teacher"],
+])("applies the shared theme on %s for %s", (path, role) => {
+  localStorage.setItem("site-theme", "dark");
+  if (role) localStorage.setItem("status", role);
+  mount(path, !!role);
+  expect(document.documentElement.dataset.theme).toBe("dark");
+  toggle();
+  expect(document.documentElement.dataset.theme).toBe("light");
 });
 
-test("does not apply a teacher preference to a student or a signed-out session", () => {
-  localStorage.setItem("teacher-theme", "dark");
-  localStorage.setItem("role", "student");
-  const student = mount("/PersonalStud");
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
-  expect(screen.queryByRole("button", { name: /Включить .* тему/ })).toBeNull();
-  student.unmount();
-  localStorage.setItem("role", "teacher");
-  mount("/PersonalTeacher", false);
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
+test("keeps the chosen theme across public, student and teacher routes", () => {
+  mount();
+  toggle();
+  for (const name of ["Student profile", "Add laboratory", "Login"]) {
+    fireEvent.click(screen.getByText(name));
+    expect(document.documentElement.dataset.theme).toBe("dark");
+  }
 });
 
-test("syncs changes from another tab and clears dark mode on unmount", () => {
-  const view = mount();
+test("migrates the previous teacher preference and respects a newer site preference", () => {
+  localStorage.setItem("teacher-theme", "dark");
+  const first = mount();
+  expect(document.documentElement.dataset.theme).toBe("dark");
+  expect(localStorage.getItem("site-theme")).toBe("dark");
+  toggle();
+  first.unmount();
+  mount();
+  expect(document.documentElement.dataset.theme).toBe("light");
+});
+
+test("syncs another tab, including a cleared preference", () => {
+  mount();
   act(() => {
-    localStorage.setItem("teacher-theme", "dark");
-    window.dispatchEvent(new StorageEvent("storage", { key: "teacher-theme" }));
+    localStorage.setItem("site-theme", "dark");
+    window.dispatchEvent(new StorageEvent("storage", { key: "site-theme" }));
   });
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
+  expect(document.documentElement.dataset.theme).toBe("dark");
+  act(() => {
+    localStorage.clear();
+    window.dispatchEvent(new StorageEvent("storage", { key: null }));
+  });
+  expect(document.documentElement.dataset.theme).toBe("light");
+});
+
+test("still switches when browser storage is blocked", () => {
+  jest.spyOn(Storage.prototype, "getItem").mockImplementation(() => { throw new Error("Blocked"); });
+  jest.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("Blocked"); });
+  mount();
+  toggle();
+  expect(document.documentElement.dataset.theme).toBe("dark");
+  toggle();
+  expect(document.documentElement.dataset.theme).toBe("light");
+});
+
+test("falls back to light for an invalid saved preference", () => {
+  localStorage.setItem("site-theme", "invalid");
+  mount();
+  expect(document.documentElement.dataset.theme).toBe("light");
+});
+
+test.each(["student", "teacher"])("retains all mobile labels and icons for %s in both themes", role => {
+  localStorage.setItem("status", role);
+  const view = mount(role === "student" ? "/PersonalStud" : "/PersonalTeacher", true);
+  const nav = screen.getByRole("navigation", { hidden: true });
+  for (let i = 0; i < 2; i++) {
+    toggle();
+    const links = within(nav).getAllByRole("link", { hidden: true });
+    expect(links).toHaveLength(3);
+    links.forEach(link => {
+      expect(link.textContent.trim().length).toBeGreaterThan(0);
+      expect(link.querySelector("img").getAttribute("src")).toBeTruthy();
+    });
+  }
+  expect(document.body.classList.contains("has-mobile-nav")).toBe(true);
   view.unmount();
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
+  expect(document.body.classList.contains("has-mobile-nav")).toBe(false);
 });
 
-test("restores a saved dark preference on mobile and switches from the footer", () => {
-  localStorage.setItem("teacher-theme", "dark");
-  resizeTo(375);
+test("keeps the footer toggle when the viewport changes", () => {
   mount();
-  expect(screen.getByLabelText("Тема").textContent).toBe("dark");
-  const button = screen.getByRole("button", { name: "Включить светлую тему" });
-  expect(button.parentElement.textContent).toContain("Все права защищены");
-  fireEvent.click(button);
-  expect(document.documentElement.dataset.teacherTheme).toBeUndefined();
-  expect(localStorage.getItem("teacher-theme")).toBe("light");
-  fireEvent.click(screen.getByRole("button", { name: "Включить тёмную тему" }));
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-});
-
-test("preserves the selected theme across mobile and desktop widths", () => {
-  localStorage.setItem("teacher-theme", "dark");
-  mount();
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-  resizeTo(600);
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-  expect(screen.getByRole("button", { name: "Включить светлую тему" })).not.toBeNull();
-  resizeTo(601);
-  expect(document.documentElement.dataset.teacherTheme).toBe("dark");
-  expect(screen.queryByRole("button", { name: /Включить .* тему/ })).not.toBeNull();
+  toggle();
+  for (const width of [375, 600, 601, 1440]) {
+    act(() => {
+      window.innerWidth = width;
+      window.dispatchEvent(new Event("resize"));
+    });
+    expect(document.documentElement.dataset.theme).toBe("dark");
+    expect(within(screen.getByRole("contentinfo")).getByRole("button").getAttribute("aria-pressed")).toBe("true");
+  }
 });

@@ -23,7 +23,7 @@ const StatusIndicator = styled.div`
 
   margin-right: 10px; /* Отступ между индикатором и оценкой */
 
-  color: ${({ passed }) => (passed ? "#21B200" : "#EA9090")}; /* Цвет иконок */
+  color: ${({ passed }) => (passed ? "var(--success, #21B200)" : "var(--danger, #EA9090)")}; /* Цвет иконок */
 `;
 
 const Grade = styled.span`
@@ -44,7 +44,7 @@ const Grade = styled.span`
   text-align: center; /* Центрируем текст внутри элемента */
 
   color: ${({ passed }) =>
-    passed ? "#21B200" : "#EA9090"}; /* Цвет текста в зависимости от статуса */
+    passed ? "var(--success, #21B200)" : "var(--danger, #EA9090)"}; /* Цвет текста в зависимости от статуса */
 `;
 
 const LabWorkItem = ({ score, passed }) => {

@@ -303,7 +303,7 @@ export const TestsIOBlock = styled.div`
     cursor: pointer;
     color: var(--text-secondary, #333);
     &:hover {
-      color: #4caf50;
+      color: var(--success, #4caf50);
     }
   }
   .textarea {
@@ -466,7 +466,7 @@ export const Notification = styled.div`
   color: #fff;
   font-family: "Montserrat";
   font-size: 14px;
-  background-color: ${({ $isSuccess }) => ($isSuccess ? "#28a745" : "#dc3545")};
+  background-color: ${({ $isSuccess }) => ($isSuccess ? "var(--success-bg, #28a745)" : "var(--danger-bg, #dc3545)")};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.5s ease, transform 0.5s ease;
   z-index: 1001;

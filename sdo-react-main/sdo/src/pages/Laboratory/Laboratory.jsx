@@ -293,7 +293,7 @@ const ButtonDelete = styled.button`
   flex-shrink: 0;
 
   &:hover {
-    background: #ff7070;
+    background: var(--danger-bg, #ff7070);
     color: #fff;
     border-style: none;
     transition: 0.5s;
@@ -533,7 +533,7 @@ const Notification = styled.div`
   color: #fff;
   font-family: "Montserrat";
   font-size: 14px;
-  background-color: #28a745;
+  background-color: var(--success-bg, #28a745);
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transform: translateY(${({ visible }) => (visible ? "0" : "20px")});
   transition:
@@ -542,7 +542,7 @@ const Notification = styled.div`
   z-index: 1000;
 
   &.error {
-    background-color: #dc3545;
+    background-color: var(--danger-bg, #dc3545);
   }
 `;
 

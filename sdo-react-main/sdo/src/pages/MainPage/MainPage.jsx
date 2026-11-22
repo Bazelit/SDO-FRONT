@@ -41,9 +41,9 @@ const Hero = styled.div`
     cursor: pointer;
     border-radius: 6px;
     border-style: none;
-    background-color: #C8D5F6;
+    background-color: var(--accent, #C8D5F6);
     font-size: 15px;
-    color: #252525;
+    color: var(--text, #252525);
     font-family: "Montserrat";
     display: none;
     text-decoration: none;
@@ -51,7 +51,7 @@ const Hero = styled.div`
     align-items: center;
 
     &:hover {
-      background-color: #DDE5F9;
+      background-color: var(--accent-hover, #DDE5F9);
       color: #FFF;
       transition: 0.4s;
     }
@@ -60,14 +60,14 @@ const Hero = styled.div`
   h1 {
     font-size: 42px;
     font-weight: 700;
-    color: #000;
+    color: var(--text, #000);
     margin-bottom: 20px;
   }
 
   p {
     font-size: 20px;
     line-height: 32px;
-    color: #000;
+    color: var(--text, #000);
   }
 
   /* на средних экранах слегка уменьшаем шрифты */

@@ -9,7 +9,7 @@ import add from "../../img/add.svg";
 import labsDark from "../../img/theme/labs-dark.svg";
 import addDark from "../../img/theme/add-dark.svg";
 import accountDark from "../../img/theme/account-dark.svg";
-import { useTeacherTheme } from "../ThemeContext";
+import { useTheme } from "../ThemeContext";
 
 /* Нижняя панель навигации для телефонов (до 600px).
    Закреплена внизу экрана, учитывает «чёлку»/полоску жестов на iPhone.
@@ -71,6 +71,8 @@ const FooterStyle = styled.nav`
         height: 24px;
     }
 
+    .navBtn--light-icon img { filter: brightness(0) invert(1); }
+
     &.theme-dark {
         height: calc(82px + env(safe-area-inset-bottom, 0px));
         .navBtn { opacity: 1; gap: 2px; padding: 8px 4px 12px; font-size: 10px; }
@@ -81,8 +83,8 @@ const FooterStyle = styled.nav`
 
 const studentItems = [
     { to: "/", icon: main, label: "Главная" },
-    { to: "/StudLaboratory", icon: labs, label: "Лабораторные" },
-    { to: "/PersonalStud", icon: lk, label: "Кабинет" },
+    { to: "/StudLaboratory", icon: labs, darkIcon: labsDark, label: "Лабораторные" },
+    { to: "/PersonalStud", icon: lk, darkIcon: accountDark, label: "Кабинет" },
 ];
 
 const teacherItems = [
@@ -99,11 +101,12 @@ const isActive = (pathname, to) => {
 };
 
 const FooterMobile = ({ setIsLoggedIn, isLoggedIn }) => {
-    const { theme } = useTeacherTheme();
+    const { theme } = useTheme();
     const location = useLocation();
     // Роль читаем при каждом рендере (в т.ч. при смене страницы):
     // при входе она записывается в localStorage чуть позже, чем isLoggedIn.
-    const userRole = localStorage.getItem("status") || localStorage.getItem("role");
+    let userRole = null;
+    try { userRole = localStorage.getItem("status") || localStorage.getItem("role"); } catch { /* Navigation stays hidden if storage is unavailable. */ }
 
     const items =
         userRole === "student" ? studentItems : userRole === "teacher" ? teacherItems : [];
@@ -122,10 +125,10 @@ const FooterMobile = ({ setIsLoggedIn, isLoggedIn }) => {
                 <Link
                     key={item.to}
                     to={item.to}
-                    className={`navBtn ${isActive(location.pathname, item.to) ? "active" : ""}`}
+                    className={`navBtn ${theme === "dark" && !item.darkIcon ? "navBtn--light-icon" : ""} ${isActive(location.pathname, item.to) ? "active" : ""}`}
                 >
-                    <img src={theme === "dark" ? item.darkIcon : item.icon} alt="" />
-                    <span>{theme === "dark" ? item.darkLabel : item.label}</span>
+                    <img src={theme === "dark" && item.darkIcon ? item.darkIcon : item.icon} alt="" />
+                    <span>{theme === "dark" && item.darkLabel ? item.darkLabel : item.label}</span>
                 </Link>
             ))}
         </FooterStyle>

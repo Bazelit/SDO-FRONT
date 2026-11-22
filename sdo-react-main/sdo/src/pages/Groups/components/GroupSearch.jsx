@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useTeacherTheme } from "../../../components/ThemeContext";
+import { useTheme } from "../../../components/ThemeContext";
 import lightIcon from "../../../img/theme/search-light.svg";
 import darkIcon from "../../../img/theme/search-dark.svg";
 
@@ -28,7 +28,7 @@ const Field = styled.div`
 `;
 
 export default function GroupSearch({ label, value, onChange }) {
-  const { theme } = useTeacherTheme();
+  const { theme } = useTheme();
   return (
     <Field>
       <input type="text" aria-label={label} placeholder={label} value={value}

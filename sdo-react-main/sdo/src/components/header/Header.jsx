@@ -5,7 +5,7 @@ import Bread from "../BreadCrumbs";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useTeacherTheme } from "../ThemeContext";
+import { useTheme } from "../ThemeContext";
 import logoDarkDesktop from "../../img/theme/logo-dark-desktop.png";
 
 const HeaderStyle = styled.header`
@@ -58,7 +58,7 @@ const HeaderWrapper = styled.div`
   }
   @media (max-width: 600px) {
     &:has(.logo-dark) { padding: 15px 24px; gap: 12px; }
-    .logo-dark { width: 138px; height: 50px; object-fit: cover; }
+    .logo-dark { width: 138px; height: 50px; object-fit: contain; }
   }
 `;
 
@@ -221,7 +221,7 @@ const getPageConfig = (pathname) => {
 };
 
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
-  const { theme } = useTeacherTheme();
+  const { theme } = useTheme();
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();

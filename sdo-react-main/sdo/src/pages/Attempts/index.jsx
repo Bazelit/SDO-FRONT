@@ -15,7 +15,7 @@ const Section = styled.section`
     .block__test{
         width: 100%;
         max-width: 1294px;
-        background-color: #E2EDD0;
+        background-color: var(--panel, #E2EDD0);
         min-height: 85px;
         border-radius: 10px;
         margin-top: 5px;
@@ -48,8 +48,8 @@ const Attempt = styled.div`
     width: 294px;
     max-width: 100%;
     height: 64px;
-    background-color: #D9D9D9;
-    color: #000000;
+    background-color: var(--badge, #D9D9D9);
+    color: var(--text, #000000);
     font-size: 16px;
     font-weight: 400;
     font-family: 'Montserrat';
@@ -60,7 +60,7 @@ const Attempt = styled.div`
 `
 
 const Text = styled.p`
-    color: #000000;
+    color: var(--text, #000000);
     font-size: 16px;
     font-weight: 400;
     font-family: 'Montserrat';
@@ -71,7 +71,7 @@ const Block = styled.div`
     max-width: 1294px;
     min-height: ${({ $height }) => $height ? '585px' : '196px'};
     padding: 20px;
-    background-color: #D5DEF6;
+    background-color: var(--panel, #D5DEF6);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ const Li = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--surface, #ffffff);
     border-radius: 10px;
     font-size: 16px;
     font-weight: 400;
@@ -142,7 +142,7 @@ const LiStatus = styled.li`
     flex-wrap: wrap;
     column-gap: 16px;
     border-radius: 10px;
-    background-color: ${({ status }) => status === 'WA' ? '#FF0000' : '#ffffff'};
+    background-color: ${({ status }) => status === 'WA' ? 'var(--danger-panel, #FF0000)' : 'var(--surface, #ffffff)'};
     list-style-type: none;
     display: flex;
     justify-content: space-around;
@@ -153,14 +153,14 @@ const Span = styled.span`
     min-height: 45px;
     text-align: center;
     padding: 0 12px;
-    background-color: #ffffff;
+    background-color: var(--surface, #ffffff);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.5s, color 0.5s;
     :hover {
-        background-color: #C8D5F6;
+        background-color: var(--accent, #C8D5F6);
         color: #FFFFFF;
         width: 426px;
         height: 45px;
@@ -172,7 +172,7 @@ const Span = styled.span`
     }
     a {
         text-decoration: none;
-        color: #000000;
+        color: var(--text, #000000);
         font-size: 16px;
         font-weight: 400;
         font-family: 'Montserrat';

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const GridContainer = styled.div`
-  background-color: #BECBEE;
+  background-color: var(--accent, #BECBEE);
   display: flex;
   justify-content: space-between;
   padding: 30px 10px;
@@ -30,7 +30,7 @@ const Column = styled.div`
 `;
 
 const Block = styled.div`
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   width: 400px;
   max-width: 100%;
   height: 100px;

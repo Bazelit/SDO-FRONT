@@ -230,7 +230,7 @@ const RowBlocks = styled.div`
   .BtnEx{
     width: 100%;
     display: none;
-    background-color: #FF7070;
+    background-color: var(--danger-bg, #FF7070);
     border: none;
     border-radius: 8px;
     color: white;

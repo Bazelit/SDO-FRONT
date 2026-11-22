@@ -15,7 +15,7 @@ const LabItemContainer = styled.div`
 
 const LabName = styled.p`
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   margin: 0;
   flex: 1;
   min-width: 0;
@@ -29,7 +29,7 @@ const LabGrade = styled.p`
   font-size: 14px;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: ${({ grade }) => (grade === 'Success' ? '#85A4518C' : '#FF7070')};
+  background-color: ${({ grade }) => (grade === 'Success' ? 'var(--success-bg, #85A4518C)' : 'var(--danger-bg, #FF7070)')};
   color: white;
   margin: 0;
   font-weight: 600;

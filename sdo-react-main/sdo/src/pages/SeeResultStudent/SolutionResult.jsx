@@ -22,9 +22,9 @@ const SolutionResult = ({id, index, code, testResult, task_id, student_id}) => {
         <>
         <S.SolutionBlock $color={
                 testResult?.execution_status === "Success"
-                    ? "var(--panel, #E6F4CF)"
+                    ? "var(--success-panel, #E6F4CF)"
                     : testResult?.execution_status === "Failed"
-                        ? "var(--panel, #F9DFDF8C)"
+                        ? "var(--danger-panel, #F9DFDF8C)"
                         : "var(--panel, #d6d6d6)"
             }>
             <S.SolutionInfo>

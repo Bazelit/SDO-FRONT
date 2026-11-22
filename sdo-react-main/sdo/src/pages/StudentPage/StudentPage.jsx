@@ -57,7 +57,7 @@ const ListSubject = styled.div`
   max-width: 100%;
   min-height: 60px;
   padding: 12px 25px;
-  background-color: ${props => props.$isCompleted ? "#4CAF50" : "var(--surface, #fff)"};
+  background-color: ${props => props.$isCompleted ? "var(--success-bg, #4CAF50)" : "var(--surface, #fff)"};
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -217,7 +217,7 @@ export default function StudentPage() {
                             <TextDiscipline>{labName}</TextDiscipline>
                         </ListSubject>
                     ))}
-                    {error && <Text style={{ color: "red" }}>{error}</Text>}
+                    {error && <Text style={{ color: "var(--danger, red)" }}>{error}</Text>}
                 </BigList>
             </RowBlocks>
         </SectionLab>

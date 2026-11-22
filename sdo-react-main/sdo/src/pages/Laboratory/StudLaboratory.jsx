@@ -32,11 +32,11 @@ const SectionLab = styled.div`
     padding: 10px;
     font-size: 16px;
     text-align: center;
-    color: #000;
+    color: var(--text, #000);
     font-family: Montserrat;
     line-height: 27px;
     text-decoration: none;
-    background: #f0f0f0;
+    background: var(--field, #f0f0f0);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -48,12 +48,12 @@ const SectionLab = styled.div`
   }
 
   .section__lab-btn:hover {
-    background: #d9d9d9;
+    background: var(--badge, #d9d9d9);
     transition: 0.3s;
   }
 
   .section__lab-btn.active {
-    background: #becbee;
+    background: var(--accent, #becbee);
     color: #fff;
   }
 
@@ -138,18 +138,18 @@ const SubjectSelect = styled.select`
   width: 100%;
   height: 47px;
   font-family: "Montserrat";
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
   border-radius: 8px;
   padding: 0 40px 0 15px;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   cursor: pointer;
   box-sizing: border-box;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: var(--select-arrow, url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"));
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 16px;
@@ -165,7 +165,7 @@ const SubjectSelect = styled.select`
 `;
 
 const NameLab = styled.p`
-  color: #000;
+  color: var(--text, #000);
   font-family: "Montserrat";
   font-size: 19px;
   margin: 0;
@@ -220,9 +220,9 @@ const LabItem = styled.li`
   font-size: 18px;
   font-family: Montserrat;
   background: ${(props) => {
-    if (props.$status === "success") return "#E6F4CF";     
-    if (props.$status === "failed") return "#FFC7C7";      
-    return "#f0f0f0";                                       
+    if (props.$status === "success") return "var(--success-panel, #E6F4CF)";
+    if (props.$status === "failed") return "var(--danger-panel, #FFC7C7)";
+    return "var(--panel, #f0f0f0)";
   }};
   border-radius: 7px;
   display: flex;
@@ -255,7 +255,7 @@ const LabItem = styled.li`
 const TaskButton = styled.button`
   width: 161px;
   height: 39px;
-  background-color: #becbee;
+  background-color: var(--accent, #becbee);
   font-size: 14px;
   font-family: "Montserrat";
   color: #fff;
@@ -268,7 +268,7 @@ const TaskButton = styled.button`
   white-space: nowrap;
 
   &:hover {
-    background-color: #d9d9d9;
+    background-color: var(--badge, #d9d9d9);
   }
 
   @media (max-width: 768px) {
@@ -307,13 +307,13 @@ const SearchInput = styled.input`
   width: 100%;
   height: 47px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
   border-radius: 8px;
   outline: none;
   font-size: 16px;
   font-family: "Montserrat";
-  color: #000;
+  color: var(--text, #000);
   text-align: center;
   padding: 0 40px 0 20px;
 
@@ -328,7 +328,7 @@ const SearchIcon = styled(FaSearch)`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #000;
+  color: var(--text, #000);
 `;
 
 const StudLaboratory = () => {

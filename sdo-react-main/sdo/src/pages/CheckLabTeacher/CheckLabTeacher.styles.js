@@ -283,6 +283,7 @@ export const StudentLabResult = styled.div`
 `
 
 export const StudentLabDowland = styled.button`
+color: var(--text, #000);
 position:relative;
 width:39px;
 height:39px;
@@ -394,7 +395,7 @@ export const Notification = styled.div`
   bottom: 20px;
   right: 20px;
   padding: 15px;
-  background-color: ${({ success }) => (success ? '#4CAF50' : '#F44336')};
+  background-color: ${({ success }) => (success ? 'var(--success-bg, #4CAF50)' : 'var(--danger-bg, #F44336)')};
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -426,7 +427,7 @@ export const ErrorNotification = styled.div`
   bottom: 20px;
   left: 20px;
   padding: 15px;
-  background-color: #F44336;
+  background-color: var(--danger-bg, #F44336);
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
