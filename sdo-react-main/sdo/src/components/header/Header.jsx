@@ -5,10 +5,12 @@ import Bread from "../BreadCrumbs";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IoLogOutOutline } from "react-icons/io5";
+import { useTheme } from "../ThemeContext";
+import logoDarkDesktop from "../../img/theme/logo-dark-desktop.png";
 
 const HeaderStyle = styled.header`
   width: 100%;
-  background-color: #c8d5f6;
+  background-color: var(--chrome, #c8d5f6);
 `;
 
 const HeaderWrapper = styled.div`
@@ -18,7 +20,7 @@ const HeaderWrapper = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   max-width: ${({ $maxWidth }) => $maxWidth || "1440px"};
-  padding: ${({ $padding }) => $padding || "12px 40px 0 60px"};
+  padding: ${({ $padding }) => $padding || "12px 40px 12px 60px"};
 
   img {
     display: block;
@@ -30,10 +32,10 @@ const HeaderWrapper = styled.div`
   /* на ширине меньше контейнера страницы добавляем боковые отступы,
      чтобы логотип и кнопки не прилипали к краям экрана */
   @media (max-width: 1300px) {
-    padding: 12px 20px 0;
+    padding: 12px 20px 12px 20px;
   }
   @media (max-width: 768px) {
-    padding: 10px 16px 0;
+    padding: 10px 16px 12px 16px;
   }
   @media (max-width: 600px) {
     padding: 8px 16px;
@@ -48,6 +50,16 @@ const HeaderWrapper = styled.div`
   @media (max-width: 570px) { img { height: 42px; } }
   @media (max-width: 480px) { img { height: 38px; } }
   @media (max-width: 400px) { img { height: 36px; } }
+
+  .logo-dark {
+    width: 232px;
+    height: 56px;
+    object-fit: contain;
+  }
+  @media (max-width: 600px) {
+    &:has(.logo-dark) { padding: 15px 24px; gap: 12px; }
+    .logo-dark { width: 138px; height: 50px; object-fit: contain; }
+  }
 `;
 
 const Nav = styled.nav`
@@ -60,12 +72,12 @@ const Nav = styled.nav`
   min-width: 0;
 
   .header__nav-lr {
-    color: #415588;
+    color: var(--text, #415588);
     text-decoration: none;
     font-size: 16px;
     font-family: "Montserrat";
     line-height: 1.5;
-    background-color: #fff;
+    background-color: var(--header-button, #fff);
     width: 232px;
     height: 36px;
     border-radius: 7px;
@@ -83,7 +95,7 @@ const Nav = styled.nav`
 
   .header__nav-lr:hover {
     color: #fff;
-    background-color: #dde5f9;
+    background-color: var(--accent-hover, #dde5f9);
     transform: translateY(-1px);
   }
 
@@ -123,11 +135,11 @@ const Nav = styled.nav`
 `;
 
 const ButtonEx = styled.button`
-  color: #415588;
+  color: var(--text, #415588);
   font-size: 16px;
   font-family: "Montserrat";
   line-height: 1.5;
-  background-color: #fff;
+  background-color: var(--header-button, #fff);
   width: 232px;
   height: 36px;
   border-radius: 7px;
@@ -146,7 +158,7 @@ const ButtonEx = styled.button`
 
   &:hover {
     color: #fff;
-    background-color: #dde5f9;
+    background-color: var(--accent-hover, #dde5f9);
     transform: translateY(-1px);
   }
 
@@ -175,14 +187,14 @@ const ButtonEx = styled.button`
 `;
 
 const PAGE_CONFIG = {
-  "/personalteacher": { maxWidth: "1140px", padding: "12px 0 0 0" },
-  "/personalstud":    { maxWidth: "1030px", padding: "12px 0 0 0" },
-  "/laboratory":      { maxWidth: "1236px", padding: "12px 0 0 0" },
-  "/studlaboratory":  { maxWidth: "1270px", padding: "12px 0 0 0" },
-  "/laboratoryadd":   { maxWidth: "1248px", padding: "12px 0 0 0" },
-  "/prepodredlab":    { maxWidth: "1248px", padding: "12px 0 0 0" },
-  "/checklabteacher": { maxWidth: "1248px", padding: "12px 0 0 0" },
-  default:            { maxWidth: "1440px", padding: "12px 40px 0 60px" },
+  "/personalteacher": { maxWidth: "1140px", padding: "12px 0 12px 0" },
+  "/personalstud":    { maxWidth: "1030px", padding: "12px 0 12px 0" },
+  "/laboratory":      { maxWidth: "1236px", padding: "12px 0 12px 0" },
+  "/studlaboratory":  { maxWidth: "1270px", padding: "12px 0 12px 0" },
+  "/laboratoryadd":   { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  "/prepodredlab":    { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  "/checklabteacher": { maxWidth: "1248px", padding: "12px 0 12px 0" },
+  default:            { maxWidth: "1440px", padding: "12px 40px 12px 60px" },
 };
 
 const getPageConfig = (pathname) => {
@@ -209,6 +221,7 @@ const getPageConfig = (pathname) => {
 };
 
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
+  const { theme } = useTheme();
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -246,7 +259,9 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
         <HeaderWrapper $maxWidth={config.maxWidth} $padding={config.padding}>
           <div>
             <Link to="/">
-              <img src={logo} alt="логотип" />
+              {theme === "dark" ? (
+                <img className="logo-dark" src={logoDarkDesktop} alt="Московский Политех" />
+              ) : <img src={logo} alt="Московский Политех" />}
             </Link>
           </div>
           <Nav>

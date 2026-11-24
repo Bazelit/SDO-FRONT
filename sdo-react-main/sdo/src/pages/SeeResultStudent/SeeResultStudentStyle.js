@@ -14,7 +14,7 @@ export const Container = styled.div`
 `
 
 export const Description = styled.div`
-  background-color: #DDE5F8;
+  background-color: var(--panel, #DDE5F8);
   padding: 32px 32px;
   margin-top: 40px;
   border-radius:4px;
@@ -57,6 +57,7 @@ export const DescriptionTextBold = styled.p`
 
 export const DescriptionTest = styled.div`
   margin-top: 21px;
+  font-family: Montserrat, sans-serif;
 `
 
 
@@ -100,7 +101,7 @@ export const DetailsBtn = styled.button`
     width: 181px;
     height: 30px;
     flex-shrink: 0;
-    background-color: #BECBEE;
+    background-color: var(--accent, #BECBEE);
     color: white;
     font-family: Montserrat;
     font-weight: 500;
@@ -131,7 +132,7 @@ export const SolutionDetails = styled.div`
 export const SolutionDetailsCode = styled.div`
     white-space: pre-wrap;
     overflow-wrap: anywhere;
-    background-color: #F0F0F0;
+    background-color: var(--field, #F0F0F0);
     width: 100%;
     max-width: 1195px;
     font-size: 20px;
@@ -170,7 +171,7 @@ export const SolutionDetailsBlock = styled.div`
     grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
     align-items: baseline;
     column-gap: 16px;
-    border: 1px solid black;
+    border: 1px solid var(--border, black);
     width: 100%;
     max-width: 1195px;
     border-radius: 4px;
@@ -184,7 +185,7 @@ export const SolutionDetailsBlock = styled.div`
         width: 100%;
         height: 1px;
         margin: 5px auto;
-        background-color: black;
+        background-color: var(--text, black);
     }
 
     @media (max-width: 600px) {
@@ -217,7 +218,7 @@ export const ThrowAttemps = styled.button`
     min-height: 40px;
     border-radius: 8px;
     opacity: 1;
-    background-color: #dfe8d1;
+    background-color: var(--accent, #dfe8d1);
     font-family: Montserrat;
     font-weight: 400;
     font-size: 18px;
@@ -252,7 +253,7 @@ min-width: 0;
 `
 
 export const TaskStudentAttemps = styled.div`
-    background-color:#F0F0F0;
+    background-color:var(--field, #F0F0F0);
     border-radius: 4px;
     padding: 10px 32px;
 
@@ -296,7 +297,7 @@ export const Attemps = styled.h2`
 `
 
 export const LimitBlock = styled.div`
-    background-color:#F0F0F0;
+    background-color:var(--field, #F0F0F0);
     margin-top: 20px;
     padding: 32px 32px;
     border-radius: 4px;
@@ -351,11 +352,11 @@ export const LimitBlockTextZ = styled.h1`
 export const AttempsLine = styled.div`
     width: 100%;
     height: 10px;
-    background-color: #D1D5DB;
+    background-color: var(--badge, #D1D5DB);
 `
 
 export const AttempsLineProgres = styled.div`
-background-color: #bccef7;
+background-color: var(--accent, #bccef7);
          width: ${(props) => props.$width}%;
          max-width: 100%;
          height: 100%
@@ -420,7 +421,7 @@ export const SolutionBlockCode = styled.div`
 export const SolutionBlockCodeBtn = styled.button`
    width: 181px;
     height: 30px;
-    background-color: #BECBEE;
+    background-color: var(--accent, #BECBEE);
     color: white;
     font-family: Montserrat;
     font-weight: 500;
@@ -444,10 +445,10 @@ export const Filter = styled.select`
     cursor: pointer;
     height: 30px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: var(--field, #f0f0f0);
     padding: 0 10px;
     font-size: 16px;
-    color: #000;
+    color: var(--text, #000);
     text-align: center;
     border-radius: 8px;
     margin-right: 30px;

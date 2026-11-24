@@ -6,11 +6,19 @@ import Footer from "./components/Footer/Footer";
 import FooterMobile from "./components/Footer/FooterMobile";
 import styled from 'styled-components';
 import "./styles/style.css";
+import "./styles/theme.css";
+import { ThemeProvider } from "./components/ThemeContext";
 
 const Page = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 600px) {
+    body.has-mobile-nav & {
+      padding-bottom: calc(var(--mobile-nav-h) + var(--safe-bottom));
+    }
+  }
 `;
 
 const Main = styled.main`
@@ -43,6 +51,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <ThemeProvider>
         <Page>
           <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           <Main>
@@ -51,6 +60,7 @@ function App() {
           <FooterMobile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </Page>
+        </ThemeProvider>
       </Router>
     </div>
   );

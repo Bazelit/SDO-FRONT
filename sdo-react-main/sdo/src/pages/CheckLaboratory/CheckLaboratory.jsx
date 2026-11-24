@@ -5,7 +5,7 @@ import "../CheckLaboratory/style.css";
 import styled from "styled-components";
 import InputOutputTask from "./components/InputOutputTask.jsx";
 import StudentLabs from "./components/StudentLabs.jsx";
-import { FaSearch } from "react-icons/fa";
+import ThemedSearchIcon from "../../components/ThemedSearchIcon";
 
 const Container = styled.div`
   padding: 0 200px;
@@ -85,7 +85,7 @@ const SearchInput = styled.input`
 
   box-sizing: border-box;
 
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
 
   border: none;
 
@@ -95,7 +95,7 @@ const SearchInput = styled.input`
 
   font-size: 16px; // Уменьшаемый размер шрифта
 
-  color: #000; // Цвет текста
+  color: var(--text, #000); // Цвет текста
 
   text-align: center; // Центрируем текст
 
@@ -114,13 +114,13 @@ const Select = styled.select`
 
   border: none;
 
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
 
   padding: 0; // Убираем отступы
 
   font-size: 16px; // Уменьшаемый размер шрифта
 
-  color: #000; // Цвет текста
+  color: var(--text, #000); // Цвет текста
 
   text-align: center; // Центрируем текст
 
@@ -142,7 +142,7 @@ const SearchWrapper = styled.div`
   position: relative;
 `;
 
-const SearchIcon = styled(FaSearch)`
+const SearchIcon = styled(ThemedSearchIcon)`
   position: absolute;
 
   right: 15px; // Отступ от правого края
@@ -152,7 +152,7 @@ const SearchIcon = styled(FaSearch)`
 
   transform: translateY(-50%);
 
-  color: #000;
+  color: var(--text, #000);
 
   cursor: pointer;
 `;

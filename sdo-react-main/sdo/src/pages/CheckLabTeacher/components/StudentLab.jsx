@@ -51,18 +51,18 @@ const StudentLab = ({name, isSubmitted, score, task_id, stud_id}) => {
         if (scoreInput === ''){
             return <>Изменить оценку</>
         }
-        return <S.StudentLabChange>Оценка изменена <span style={{fontWeight: '600', marginLeft: '10px', color: scoreInput > 75 ? '#21B200' : '#FF7070' }}>{scoreInput}/100</span></S.StudentLabChange>
+        return <S.StudentLabChange>Оценка изменена <span style={{fontWeight: '600', marginLeft: '10px', color: scoreInput > 75 ? 'var(--success, #21B200)' : 'var(--danger, #FF7070)' }}>{scoreInput}/100</span></S.StudentLabChange>
     }
 
     return (
-        <S.StudentsLab $color={isSubmitted ? (score > 60 ? "#E6F4CF" : "#F9DFDF8C") : "#F0F0F0"}>
+        <S.StudentsLab $color={isSubmitted ? (score > 60 ? "var(--success-panel, #E6F4CF)" : "var(--danger-panel, #F9DFDF8C)") : "var(--field, #F0F0F0)"}>
             <S.StudentsLabText>
                 {name}
             </S.StudentsLabText>
             {isSubmitted ? (
             <S.StudentLabAction>
                 <S.StudentsLabtn onClick={() => navigate(`/seeresultstudent/${task_id}/${stud_id}`)}>Просмотр результатов</S.StudentsLabtn>
-                <S.StudentLabResult $color={score > 75 ? "#21B200" : "#FF7070"}>{score}/100</S.StudentLabResult>
+                <S.StudentLabResult $color={score > 75 ? "var(--success, #21B200)" : "var(--danger, #FF7070)"}>{score}/100</S.StudentLabResult>
                 <S.StudentLabDowland onClick = {() => DowlandFile(task_id, stud_id)}><VectorIcon/></S.StudentLabDowland>
                 <S.StudentLabChange>
                     {isEditingScore ? (

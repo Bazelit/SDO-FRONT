@@ -50,7 +50,7 @@ const TitleText = styled.p`
 const StatusMarker = styled.div`
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: ${({ status }) => (status === 'Success' ? '#4CAF50' : '#F44336')};
+  background-color: ${({ status }) => (status === 'Success' ? 'var(--success-bg, #4CAF50)' : 'var(--danger-bg, #F44336)')};
   color: white;
   font-size: 14px;
   font-weight: 600;
@@ -60,14 +60,14 @@ const StatusMarker = styled.div`
 
 const BlockTest = styled.div`
   width: 100%;
-  background-color: #F0F0F0;
+  background-color: var(--field, #F0F0F0);
   border-radius: 7px;
   padding: 15px;
 `;
 
 const BlockDescription = styled.div`
   width: 100%;
-  background-color: #E0E0E0;
+  background-color: var(--badge, #E0E0E0);
   border-radius: 7px;
   padding: 15px;
 
@@ -78,7 +78,7 @@ const BlockDescription = styled.div`
 
 const BlockLimits = styled.div`
   width: 100%;
-  background-color: #F5F0E6;
+  background-color: var(--warning-panel, #F5F0E6);
   border-radius: 7px;
   padding: 15px;
 
@@ -101,7 +101,7 @@ const SolutionMetaText = styled.p`
 
 const BlockTask = styled.div`
   width: 100%;
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   padding: 10px;
   border-radius: 7px;
   margin-top: 5px;
@@ -131,7 +131,7 @@ const Text = styled.p`
 const SolutionContainer = styled.div`
   margin-top: 20px;
   padding: 15px;
-  background-color: #FFFFFF;
+  background-color: var(--surface, #FFFFFF);
   border-radius: 7px;
 
   @media (max-width: 480px) {
@@ -142,7 +142,7 @@ const SolutionContainer = styled.div`
 
 const SolutionCode = styled.pre`
   font-size: 14px;
-  background-color: #F0F0F0;
+  background-color: var(--field, #F0F0F0);
   padding: 10px;
   border-radius: 5px;
   white-space: pre-wrap;
@@ -155,7 +155,7 @@ const SolutionCode = styled.pre`
 `;
 
 const ToggleButton = styled.button`
-  background-color: #FFFFFF;
+  background-color: var(--surface, #FFFFFF);
   border: none;
   padding: 5px 10px;
   font-family: "Montserrat";
@@ -164,7 +164,7 @@ const ToggleButton = styled.button`
   margin-left: 10px;
 
   &:hover {
-    background-color: #E0E0E0;
+    background-color: var(--badge, #E0E0E0);
   }
 `;
 
@@ -172,7 +172,7 @@ const Button = styled.button`
   padding: 10px;
   width: 100%;
   height: 91px;
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   border-style: none;
   border-radius: 7px;
   font-family: "Montserrat";
@@ -184,15 +184,15 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #D9D9D9;
-    color: #000;
+    background: var(--badge, #D9D9D9);
+    color: var(--text, #000);
     transition: 0.3s;
   }
 
   @media (max-width: 600px) {
     height: 56px;
     margin: 0;
-    background-color: #DDE5F8;
+    background-color: var(--panel, #DDE5F8);
   }
 `;
 
@@ -209,13 +209,13 @@ const ButtonContainer = styled.div`
 `;
 
 const UploadTitle = styled.div`
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   padding: 10px;
   margin: 0;
 `;
 
 const UploadContainer = styled.div`
-  background-color: #FFFFFF;
+  background-color: var(--surface, #FFFFFF);
   padding: 15px;
   border-radius: 0 0 7px 7px;
 `;
@@ -230,7 +230,7 @@ const Notification = styled.div`
   bottom: 20px;
   right: 20px;
   padding: 15px;
-  background-color: ${({ success }) => (success ? '#4CAF50' : '#F44336')};
+  background-color: ${({ success }) => (success ? 'var(--success-bg, #4CAF50)' : 'var(--danger-bg, #F44336)')};
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -262,7 +262,7 @@ const ErrorNotification = styled.div`
   bottom: 20px;
   left: 20px;
   padding: 15px;
-  background-color: #F44336;
+  background-color: var(--danger-bg, #F44336);
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -303,7 +303,7 @@ const CloseButton = styled.button`
 const DeleteButton = styled.button`
   background: none;
   border: none;
-  color: #F44336;
+  color: var(--danger, #F44336);
   font-size: 16px;
   cursor: pointer;
   padding: 5px;
@@ -311,7 +311,7 @@ const DeleteButton = styled.button`
   align-items: center;
 
   &:hover {
-    color: #D32F2F;
+    color: var(--danger-hover, #D32F2F);
   }
 `;
 
@@ -320,7 +320,7 @@ const SolutionItem = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 10px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--border, #E0E0E0);
   &:last-child {
     border-bottom: none;
   }
@@ -345,7 +345,7 @@ const SolutionCodeBtn = styled.span`
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 10px solid #333;
+    border-top: 10px solid var(--text, #333);
     cursor: pointer;
 
     transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
@@ -367,7 +367,7 @@ const InputValue = styled.div`
 
 const ExpectedOutput = styled.div`
   margin: 5px;
-  color: #4CAF50;
+  color: var(--success, #4CAF50);
   font-family: Montserrat;
   font-weight: 400;
   font-style: Regular;
@@ -377,7 +377,7 @@ const ExpectedOutput = styled.div`
 `
 const UserOutput = styled.div`
   margin: 5px;
-  color:  #F44336;
+  color: var(--danger, #F44336);
   font-family: Montserrat;
   font-weight: 400;
   font-style: Regular;
@@ -392,7 +392,7 @@ const ErrorTestBtn = styled.span`
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 10px solid #333;
+    border-top: 10px solid var(--text, #333);
     cursor: pointer;
     margin-left: 10px;
 
@@ -408,7 +408,7 @@ const BlockAttempts = styled.div`
     align-items: center;
     gap: 6px;
     min-height: 49px;
-    background-color: #F0F0F0;
+    background-color: var(--field, #F0F0F0);
     padding: 0 8px;
     font-family: Montserrat, sans-serif;
     font-weight: 400;
@@ -430,7 +430,7 @@ const Divider = styled.div`
   margin: 0 8px;
   width: 2px;
   height: 30px;
-  background-color: #000000;
+  background-color: var(--text, #000000);
 
   @media (max-width: 600px) {
     display: none;

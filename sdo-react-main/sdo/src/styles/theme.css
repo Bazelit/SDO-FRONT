@@ -1,0 +1,98 @@
+/* Shared site palette. Component fallbacks retain the existing light theme. */
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #1d2d44;
+  --text: #fff;
+  --text-secondary: #d9d9d9;
+  --panel: #3a496e;
+  --surface: #354766;
+  --field: #354766;
+  --accent: #465e80;
+  --accent-hover: #3a496e;
+  --badge: #424451;
+  --form-button: #424451;
+  --border: #738cab;
+  --chrome: #0d1321;
+  --header-button: #1d2d44;
+  --mobile-nav: #424451;
+  --mobile-nav-text: #dde5f8;
+  --mobile-nav-active: #3a496e;
+  --discipline-card: #3a496e;
+  --placeholder: #d9d9d9;
+  --link: #bdcff9;
+  --success: #91e6ad;
+  --danger: #ffb4b4;
+  --danger-hover: #ffd0d0;
+  --success-bg: #235535;
+  --danger-bg: #80343f;
+  --success-panel: #253f3b;
+  --danger-panel: #56323e;
+  --warning-panel: #4a4233;
+  --select-arrow: url("../img/theme/chevron-dark.svg");
+}
+
+body {
+  background-color: var(--page, #fff);
+  color: var(--text, #000);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] button {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: var(--field);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] ::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+:root[data-theme="dark"] :focus-visible {
+  outline: 2px solid #dde5f8;
+  outline-offset: 3px;
+}
+
+:root[data-theme="dark"] a:where(:not([class])) {
+  color: var(--link);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select {
+  accent-color: #bdcff9;
+}
+
+:root[data-theme="dark"] input:disabled,
+:root[data-theme="dark"] select:disabled,
+:root[data-theme="dark"] textarea:disabled,
+:root[data-theme="dark"] button:disabled {
+  opacity: 0.65;
+}
+
+:root[data-theme="dark"] input:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  box-shadow: 0 0 0 1000px var(--field) inset;
+}
+
+@media (max-width: 600px) {
+  :root[data-theme="dark"] {
+    --page: #2c3e57;
+    --chrome: #20293f;
+    --discipline-card: #354766;
+  }
+  :root[data-theme="dark"] body.has-mobile-nav {
+    --mobile-nav-h: 82px;
+  }
+}
+

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import DisciplineWindow from "./components/DisciplineWindow";
-import { FaSearch } from "react-icons/fa";
+import ThemedSearchIcon from "../../components/ThemedSearchIcon";
 
 const PageWrapper = styled.div`
   width: 100%;
@@ -11,6 +11,10 @@ const PageWrapper = styled.div`
   align-items: center;
   padding: 40px 0;
   box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    padding: 32px 24px;
+  }
 `;
 
 const DisciplinesContainer = styled.div`
@@ -20,10 +24,15 @@ const DisciplinesContainer = styled.div`
   grid-template-columns: 1fr;
   gap: 30px;
 
-  @media (max-width: 480px) {
-    width: 90%;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  @media (max-width: 600px) {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 12px;
+
+    > p {
+      grid-column: 1 / -1;
+    }
   }
 `;
 
@@ -33,16 +42,20 @@ const SearchInput = styled.input`
   font-family: "Montserrat";
   height: 47px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
   border-radius: 8px;
   outline: none;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   text-align: center;
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 44px 0 12px;
   }
 `;
 
@@ -53,17 +66,19 @@ const SearchInputContainer = styled.div`
   margin-bottom: 30px;
   box-sizing: border-box;
 
-  @media (max-width: 480px) {
-    width: 90%;
+  @media (max-width: 600px) {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 24px;
   }
 `;
 
-const SearchIcon = styled(FaSearch)`
+const SearchIcon = styled(ThemedSearchIcon)`
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #000;
+  color: var(--text, #000);
 `;
 
 const Disciplines = () => {
@@ -93,6 +108,7 @@ const Disciplines = () => {
         <SearchInput
           type="text"
           placeholder="Поиск дисциплины"
+          aria-label="Поиск дисциплины"
           value={searchValue}
           onChange={handleSearchChange}
         />

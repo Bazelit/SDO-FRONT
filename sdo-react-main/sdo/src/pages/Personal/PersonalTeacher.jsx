@@ -47,7 +47,7 @@ const SectionLab = styled.div`
 const List = styled.li`
   width: 320px;
   height: 100px;
-  background-color: #d5def6;
+  background-color: var(--panel, #d5def6);
   border-radius: 7px;
   list-style-type: none;
   display: flex;
@@ -91,7 +91,7 @@ const ListSubject = styled.div`
   max-width: 500px;
   height: 40px;
   padding: 10px 25px;
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -100,7 +100,7 @@ const ListSubject = styled.div`
   margin-bottom: 10px;
   box-sizing: border-box;
   &:hover {
-    background-color: #f0f0f0;
+    background-color: var(--field, #f0f0f0);
   }
 
   @media (max-width: 768px) {
@@ -124,7 +124,7 @@ const TextDiscipline = styled.p`
   font-size: 16px;
   margin: 0;
   text-align: center;
-  color: #000;
+  color: var(--text, #000);
 
   @media (max-width: 768px) {
     font-size: 15px;
@@ -137,7 +137,7 @@ const TextDiscipline = styled.p`
 
 const BigList = styled.li`
   width: 800px;
-  background-color: #e6f4cf;
+  background-color: var(--panel, #e6f4cf);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -230,7 +230,7 @@ const RowBlocks = styled.div`
   .BtnEx{
     width: 100%;
     display: none;
-    background-color: #FF7070;
+    background-color: var(--danger-bg, #FF7070);
     border: none;
     border-radius: 8px;
     color: white;
@@ -242,9 +242,9 @@ const RowBlocks = styled.div`
   .Btn{
     width: 100%;
     display: none;
-    background-color: #e6f4cf;
+    background-color: var(--accent, #e6f4cf);
     border-radius: 8px;
-    color: black;
+    color: var(--text, black);
     text-decoration: none;
     height: 50px;
   }
@@ -262,6 +262,38 @@ const RowBlocks = styled.div`
       display: block;
       font-size: 16px;
     }
+  }
+`;
+
+const StudentsNavigation = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text, #000);
+  background: var(--panel, #e6f4cf);
+  .action {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    background: var(--accent, #becbee);
+    color: #fff;
+  }
+  &:focus-visible { outline: 2px solid var(--border, #415588); outline-offset: 3px; }
+  @media (max-width: 600px) {
+    min-height: 51px;
+    justify-content: center;
+    padding: 12px;
+    font-size: 16px;
+    background: var(--accent, #e6f4cf);
+    .action { display: none; }
   }
 `;
 
@@ -396,9 +428,10 @@ const PersonalTeacher = () => {
         <Link to="/laboratory" className="Btn">
             <Text>Лабараторные работы</Text>
         </Link>
-        <Link to="/groups" className="Btn">
-            <Text>Обучающиеся студенты</Text>
-        </Link>
+        <StudentsNavigation to="/groups">
+            <span>Обучающиеся студенты</span>
+            <span className="action" aria-hidden="true">Перейти</span>
+        </StudentsNavigation>
         <button className="BtnEx" onClick={handleLogout}>
             Выйти
         </button>

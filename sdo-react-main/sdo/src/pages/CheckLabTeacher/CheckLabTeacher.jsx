@@ -68,8 +68,42 @@ const CheckLabTeacher = () => {
             { id: '2', name: 'По убыванию оценки' },
             { id: '3', name: 'По возрастанию оценки' },
         ]
+
+    const displayedStudents = studentsData
+        .filter((student) => searchValue === '' || student.fullName.toLowerCase().includes(searchValue.toLowerCase()))
+        .filter((student) => selectedGroup === '' || student.group === selectedGroup)
+        .slice()
+        .sort((a, b) => {
+            const groupOrder = (a.group || '').localeCompare(b.group || '', 'ru');
+            if (groupOrder !== 0) {
+                return groupOrder;
+            }
+            if (selectedSort === "По фамилии (А-Я)") {
+                return a.fullName.localeCompare(b.fullName, 'ru');
+            }
+            if (selectedSort === "По убыванию оценки") {
+                return b.score - a.score;
+            }
+            if (selectedSort === "По возрастанию оценки") {
+                return a.score - b.score;
+            }
+            return 0;
+        });
+
+    const groupedStudents = displayedStudents.reduce((result, student) => {
+        const groupName = student.group || '';
+        const currentGroup = result[result.length - 1];
+        if (!currentGroup || currentGroup.name !== groupName) {
+            result.push({ name: groupName, students: [student] });
+        } else {
+            currentGroup.students.push(student);
+        }
+        return result;
+    }, []);
+
     return (
         <S.container>
+            <S.TaskTitle>{task?.name}</S.TaskTitle>
             <S.Description>
                 <S.DescriptionText>
                     {task?.description?.replace(/\\n/g, '\n')}
@@ -82,29 +116,6 @@ const CheckLabTeacher = () => {
                     <S.DescriptionText>{task?.first_test_case?.out}</S.DescriptionText>
                 </S.DescriptionTest>
             </S.Description>
-            <S.LimitBlock>
-                            <S.LimitBlockName>Ограничения задачи</S.LimitBlockName>
-                            <S.LimitBlockLi>
-                                <S.LimitBlockText>Количество переменных:</S.LimitBlockText>
-                                <S.LimitBlockTextZ>{task?.max_variables || "-"}</S.LimitBlockTextZ>
-                            </S.LimitBlockLi>
-                            <S.LimitBlockLi>
-                                <S.LimitBlockText>Длина кода:</S.LimitBlockText>
-                                <S.LimitBlockTextZ>{task?.max_code_length ? (task?.max_code_length + ' строк') : "-"}</S.LimitBlockTextZ>
-                            </S.LimitBlockLi>
-                            <S.LimitBlockLi>
-                                <S.LimitBlockText>Объем памяти:</S.LimitBlockText>
-                                <S.LimitBlockTextZ>{task?.max_memory_mb ? (task?.max_memory_mb + ' кб') : "-"}</S.LimitBlockTextZ>
-                            </S.LimitBlockLi>
-                            <S.LimitBlockLi>
-                                <S.LimitBlockText>Время выполнения:</S.LimitBlockText>
-                                <S.LimitBlockTextZ>{task?.max_execution_time_sec ? (task?.max_execution_time_sec + ' сек') : "-"}</S.LimitBlockTextZ>
-                            </S.LimitBlockLi>
-                            <S.LimitBlockLi>
-                                <S.LimitBlockText>Количество попыток:</S.LimitBlockText>
-                                <S.LimitBlockTextZ>{(task?.max_attempts || "-") + " попыток"}</S.LimitBlockTextZ>
-                            </S.LimitBlockLi>
-                        </S.LimitBlock>
             <S.StudentList>
                 <S.StudentListH1>Список студентов:</S.StudentListH1>
                 <S.StudentListUp>
@@ -139,24 +150,21 @@ const CheckLabTeacher = () => {
                 </S.Select>
                 </S.Sort>
                 </S.StudentListUp>
-                {studentsData
-                .filter((student) => {if (searchValue === '') {return true} return student.fullName.toLowerCase().includes(searchValue.toLowerCase())})
-                .filter((student) => {if (selectedGroup === '') {return true} return student.group === selectedGroup})
-                .slice()
-                .sort((a,b) => {
-                    if (selectedSort === "По фамилии (А-Я)"){
-                        return a.fullName.localeCompare(b.fullName, 'ru');
-                    }
-                    if (selectedSort === "По убыванию оценки"){
-                        return b.score - a.score;
-                    }
-                    if (selectedSort === "По возрастанию оценки"){
-                        return a.score - b.score;
-                    }
-                })
-                .map((student) => {
-                    return <StudentLab key = {student.id} name = {student.fullName} isSubmitted = {student.isSubmitted} score = {student.score ?? 0} task_id = {task_id} stud_id = {student.id} ></StudentLab>
-                })}
+                {groupedStudents.map(({ name, students }) => (
+                    <React.Fragment key={name || 'ungrouped'}>
+                        {name && <S.GroupTitle>{name}</S.GroupTitle>}
+                        {students.map((student) => (
+                            <StudentLab
+                                key={student.id}
+                                name={student.fullName}
+                                isSubmitted={student.isSubmitted}
+                                score={student.score ?? 0}
+                                task_id={task_id}
+                                stud_id={student.id}
+                            />
+                        ))}
+                    </React.Fragment>
+                ))}
             </S.StudentList>
         </S.container>
     )

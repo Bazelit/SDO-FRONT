@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const NavContainer = styled.div`
-  background-color: #E6F4CF;
+  background-color: var(--panel, #E6F4CF);
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -31,8 +31,8 @@ const NavButton = styled.button`
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--surface, #fff);
+  color: var(--text, #000);
   font-size: 16px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;

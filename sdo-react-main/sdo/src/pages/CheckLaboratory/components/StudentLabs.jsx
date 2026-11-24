@@ -3,7 +3,7 @@ import styled from "styled-components";
 import LabWorkItem from "./LabWorkItem";
 
 const StyledContainer = styled.div`
-  background-color: #eff5e5;
+  background-color: var(--panel, #eff5e5);
   font-family: "Montserrat";
   width: 100%;
   box-sizing: border-box;
@@ -13,7 +13,7 @@ const StyledContainer = styled.div`
   align-items: center;
   margin: 20px 0;
   transition: background-color 0.3s;
-  background-color: ${({ allPassed }) => (allPassed ? "#EFF5E5" : "#F9DFDF")};
+  background-color: ${({ allPassed }) => (allPassed ? "var(--success-panel, #EFF5E5)" : "var(--danger-panel, #F9DFDF)")};
   gap: 12px;
 
   @media (max-width: 768px) {
@@ -50,7 +50,7 @@ const ChangeButton = styled.button`
   margin-left: 10px;
   font-weight: normal;
   font-size: 20px;
-  background-color: #becbee;
+  background-color: var(--accent, #becbee);
   color: white;
   border: none;
   border-radius: 5px;
@@ -59,7 +59,7 @@ const ChangeButton = styled.button`
   padding: 0 15px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--accent-hover, #0056b3);
   }
 
   &:disabled {

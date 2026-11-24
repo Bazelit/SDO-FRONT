@@ -22,7 +22,7 @@ export const BigBlock = styled.div`
   width: 100%;
   min-height: ${({ $BigHeight }) => ($BigHeight ? "530px" : "400px")};
   max-height: 530px;
-  background-color: ${({ $BigFon }) => ($BigFon ? "#E2EDD0" : "#D5DEF6")};
+  background-color: ${({ $BigFon }) => ($BigFon ? "var(--panel, #E2EDD0)" : "var(--panel, #D5DEF6)")};
   border-radius: 10px;
   display: flex;
   gap: ${({ $GapForm }) => ($GapForm ? "75px" : "0px")};
@@ -86,7 +86,7 @@ export const MinBlock = styled.li`
   min-height: 102px;
   height: auto;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: var(--surface, #ffffff);
   padding: 10px 36px 10px 10px;
   list-style-type: none;
   position: relative;
@@ -133,7 +133,7 @@ export const UlList = styled.ul`
     padding: 0px 30px 30px 20px;
   }
   .editing__block-text {
-    color: #000;
+    color: var(--text, #000);
     font-family: "Montserrat";
     font-size: 16px;
   }
@@ -142,7 +142,7 @@ export const UlList = styled.ul`
     min-height: 100px;
     border-radius: 7px;
     border-style: none;
-    color: #000;
+    color: var(--text, #000);
     font-family: "Montserrat";
     font-size: 16px;
     line-height: 27px;
@@ -161,7 +161,7 @@ export const UlList = styled.ul`
     flex: 1 1 140px;
     min-width: 0;
     border: none;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid var(--text, #000);
     background-color: transparent;
     color: inherit;
     outline: none;
@@ -187,7 +187,7 @@ export const UlList = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background-color: #e2edd0;
+    background-color: var(--form-button, #e2edd0);
     border-radius: 5px;
     width: 100%;
     min-height: 117px;
@@ -197,11 +197,11 @@ export const UlList = styled.ul`
     align-items: center;
     cursor: pointer;
     &:hover {
-      background-color: #d7ebb5eb;
+      background-color: var(--accent-hover, #d7ebb5eb);
     }
   }
   .block__end-link {
-    color: #000;
+    color: var(--text, #000);
     font-size: 16px;
     font-family: "Montserrat";
     line-height: 27px;
@@ -236,7 +236,7 @@ export const UlList = styled.ul`
 export const List = styled.li`
   width: 100%;
   min-height: ${({ $Block }) => ($Block ? "120px" : "260px")};
-  background-color: ${({ $Back }) => ($Back ? "#E2EDD0" : "#D5DEF6")};
+  background-color: ${({ $Back }) => ($Back ? "var(--panel, #E2EDD0)" : "var(--panel, #D5DEF6)")};
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -262,7 +262,7 @@ export const TitleInput = styled.input`
   border-radius: 7px;
   outline: none;
   font-family: "Montserrat";
-  background-color: #ffffff;
+  background-color: var(--surface, #ffffff);
 
   @media (max-width: 768px) {
     height: 60px;
@@ -272,7 +272,7 @@ export const TitleInput = styled.input`
 
 export const TestsIOBlock = styled.div`
   width: 100%;
-  background-color: #d5def6;
+  background-color: var(--panel, #d5def6);
   border-radius: 10px;
   min-height: 450px;
   padding-bottom: 20px;
@@ -289,7 +289,7 @@ export const TestsIOBlock = styled.div`
   .hint {
     font-size: 14px;
     font-family: "Montserrat";
-    color: #555;
+    color: var(--text-secondary, #555);
     margin: 5px 0;
     overflow-wrap: anywhere;
   }
@@ -301,9 +301,9 @@ export const TestsIOBlock = styled.div`
   .tool-icon {
     font-size: 28px;
     cursor: pointer;
-    color: #333;
+    color: var(--text-secondary, #333);
     &:hover {
-      color: #4caf50;
+      color: var(--success, #4caf50);
     }
   }
   .textarea {
@@ -334,7 +334,7 @@ export const TestsIOBlock = styled.div`
 
 export const RestrictionsBlock = styled.div`
   width: 100%;
-  background-color: #e2edd0;
+  background-color: var(--panel, #e2edd0);
   border-radius: 10px;
   padding: 20px;
   display: grid;
@@ -353,7 +353,7 @@ export const RestrictionsBlock = styled.div`
 
 export const RestrictionRoom = styled.div`
   min-width: 0;
-  background-color: #ffffff;
+  background-color: var(--surface, #ffffff);
   border-radius: 10px;
   padding: 15px;
   display: flex;
@@ -371,7 +371,7 @@ export const RestrictionRoom = styled.div`
     min-width: 0;
     height: 40px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border, #ddd);
     padding: 0 10px;
     font-family: "Montserrat";
     font-size: 14px;
@@ -387,7 +387,7 @@ export const RestrictionRoom = styled.div`
 `;
 
 export const TitleBlock = styled.h3`
-  color: #000;
+  color: var(--text, #000);
   font-family: "Montserrat";
   font-size: ${({ $FontSize }) => ($FontSize ? "16px" : "19px")};
   font-weight: ${({ $FontWeight }) => ($FontWeight ? "400" : "500")};
@@ -410,12 +410,12 @@ export const ButtonAdd = styled.button`
   flex-shrink: 0;
   border-radius: 4px;
   border: none;
-  background: #fff;
+  background: var(--form-button, #fff);
   height: 42px;
   cursor: pointer;
   margin-left: 20px;
   &:hover {
-    background: #c8d5f6;
+    background: var(--accent, #c8d5f6);
     color: #fff;
     transition: 0.5s;
   }
@@ -436,7 +436,7 @@ export const ButtonAdd = styled.button`
 export const FormSelect = styled.select`
   height: 45px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: var(--surface, #ffffff);
   border: none;
   outline: none;
   font-size: 16px;
@@ -447,7 +447,7 @@ export const FormSelect = styled.select`
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: var(--select-arrow, url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"));
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 14px;
@@ -466,7 +466,7 @@ export const Notification = styled.div`
   color: #fff;
   font-family: "Montserrat";
   font-size: 14px;
-  background-color: ${({ $isSuccess }) => ($isSuccess ? "#28a745" : "#dc3545")};
+  background-color: ${({ $isSuccess }) => ($isSuccess ? "var(--success-bg, #28a745)" : "var(--danger-bg, #dc3545)")};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.5s ease, transform 0.5s ease;
   z-index: 1001;

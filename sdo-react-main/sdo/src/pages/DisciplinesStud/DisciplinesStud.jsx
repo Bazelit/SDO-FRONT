@@ -5,7 +5,7 @@ import { getTasks } from '../../api/subjects-api';
 import { useNavigate } from "react-router-dom";
 
 const PageContainer = styled.div`
-  background-color: #fff;
+  background-color: var(--page, #fff);
   font-family: "Montserrat", sans-serif;
   min-height: 100vh;
   display: flex;
@@ -28,13 +28,13 @@ const ContentWrapper = styled.div`
 
 const Title = styled.p`
   font-size: 20px;
-  color: #000;
+  color: var(--text, #000);
   margin: 0;
 `;
 
 const TitleSection = styled.section`
   display: inline-block;
-  background-color: #DDE5F8;
+  background-color: var(--panel, #DDE5F8);
   border-radius: 8px;
   padding: 10px 20px;
   margin-bottom: 20px;
@@ -50,7 +50,7 @@ const TitleSection = styled.section`
 const GreenSection = styled.section`
   width: 100%;
   max-width: 1248px;
-  background-color: #E6F4CF;
+  background-color: var(--panel, #E6F4CF);
   border-radius: 8px;
   padding: 40px;
 
@@ -65,7 +65,7 @@ const GreenSection = styled.section`
 const StatsTitle = styled.p`
   text-align: center;
   font-size: 18px;
-  color: #000;
+  color: var(--text, #000);
   margin-bottom: 30px;
   margin-top: 0;
 `;
@@ -85,10 +85,10 @@ const StatsRow = styled.div`
 `;
 
 const StatBox = styled.div`
-  background-color: #fff;
+  background-color: var(--surface, #fff);
   border-radius: 6px;
   padding: 15px 20px;
-  color: #000;
+  color: var(--text, #000);
   width: 100%;
   text-align: center;
   font-size: 16px;
@@ -112,16 +112,20 @@ const LabRow = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: ${({ $failed }) => ($failed ? "#F9DFDF" : "#fff")};
+  background-color: ${({ $failed }) =>
+    $failed ? "var(--surface-failed, #F9DFDF)" : "var(--surface, #fff)"};
   border-radius: 6px;
   padding: 10px 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   min-height: 48px;
-  cursor: pointer; /* Курсор как у кнопки */
-  transition: background-color 0.3s ease; /* Плавный переход для hover */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ $failed }) => ($failed ? "#F3CECE" : "#f5f5f5")};
+    background-color: ${({ $failed }) =>
+      $failed
+        ? "var(--surface-failed-hover, #F3CECE)"
+        : "var(--accent-hover, #f5f5f5)"};
   }
 `;
 

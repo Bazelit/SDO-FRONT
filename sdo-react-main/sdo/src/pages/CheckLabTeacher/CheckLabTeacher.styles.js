@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import { FaSearch } from "react-icons/fa";
+import ThemedSearchIcon from "../../components/ThemedSearchIcon";
 
 export const container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
-  color: black;
+  padding: 16px 20px 40px;
+  color: var(--text, black);
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 24px 16px;
@@ -17,11 +18,28 @@ export const container = styled.div`
   }
 `
 
+export const TaskTitle = styled.p`
+  width: 100%;
+  max-width: 1253px;
+  margin: 0 0 22px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+`
+
 export const Description = styled.div`
   width: 100%;
   max-width: 1253px;
-  background-color: #DDE5F8;
-  padding: 32px 32px;
+  background-color: var(--panel, #DDE5F8);
+  padding: 28px 40px;
+  border-radius: 4px;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -32,39 +50,43 @@ export const Description = styled.div`
 `
 
 export const DescriptionText = styled.p`
-font-family: Montserrat;
-font-weight: 500;
- font-size: 20px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 10px;
 
   @media (max-width: 768px) {
-    font-size: 17px;
+    font-size: 15px;
   }
   @media (max-width: 480px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `
 
 export const DescriptionTextBold = styled.p`
-  font-size: 20px;
-  font-weight: bold;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 12px 0 8px;
 
   @media (max-width: 768px) {
-    font-size: 17px;
-    margin-bottom: 4px;
+    font-size: 15px;
   }
   @media (max-width: 480px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `
 
 export const DescriptionTest = styled.div`
   margin-top: 21px;
-
 `
 
 export const StudentList = styled.div`
    width: 100%;
    max-width: 1252px;
+   margin-top: 12px;
 `
 export const StudentListUp = styled.div`
   display: flex;
@@ -74,19 +96,23 @@ export const StudentListUp = styled.div`
 `
 
 export const StudentListH1 = styled.h1`
-   font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-weight: 500;
-  font-style: Medium;
-  font-size: 20px;
-  leading-trim: NONE;
+  font-size: 18px;
   line-height: 27px;
-  letter-spacing: 0%;
-  margin-left: 32px;
+  margin: 0 0 8px;
 
   @media (max-width: 768px) {
-    margin-left: 0;
     font-size: 18px;
   }
+`
+
+export const GroupTitle = styled.h2`
+  margin: 18px 0 6px;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
 `
 
 export const SearchInputContainer = styled.div`
@@ -103,14 +129,14 @@ export const SearchInput = styled.input`
   padding: 0 40px;
   width: 100%;
   font-family: "Montserrat";
-  height: 47px;
+  height: 40px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: var(--field, #f0f0f0);
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   outline: none;
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   text-align: center;
   &:focus {
     outline: none;
@@ -149,26 +175,26 @@ width: 231px;
     text-overflow: ellipsis;
     font-family: "Montserrat";
     cursor: pointer;
-    height: 47px;
+    height: 40px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: var(--field, #f0f0f0);
     padding: 0 10px;
     font-size: 16px;
-    color: #000;
+    color: var(--text, #000);
     text-align: center;
-    border-radius: 8px;
+    border-radius: 4px;
     box-sizing: border-box;
     &:focus {
       outline: none;
     }
 `
-export const SearchIcon = styled(FaSearch)`
+export const SearchIcon = styled(ThemedSearchIcon)`
   position: absolute;
   right: 15px;
   font-family: "Montserrat";
   top: 50%;
   transform: translateY(-50%);
-  color: #000;
+  color: var(--text, #000);
   cursor: pointer;
   pointer-events: none;
 `
@@ -217,7 +243,7 @@ min-width: 0;
 `
 
 export const StudentsLabtn = styled.button`
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   border-radius: 4px;
   border: none;
   outline: none;
@@ -240,7 +266,7 @@ export const StudentsLabtn = styled.button`
 `
 
 export const StudentLabResult = styled.div`
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   color: ${(props) => props.$color};
   font-family: Montserrat;
   font-weight: 600;
@@ -257,6 +283,7 @@ export const StudentLabResult = styled.div`
 `
 
 export const StudentLabDowland = styled.button`
+color: var(--text, #000);
 position:relative;
 width:39px;
 height:39px;
@@ -269,7 +296,7 @@ opacity: 1;
 border: none;
 outline: none;
 padding: 0;
-background-color: #D9D9D9;
+background-color: var(--badge, #D9D9D9);
 cursor:pointer;
 `
 
@@ -289,7 +316,7 @@ export const StudentLabChange = styled.div`
   line-height: 27px;
   letter-spacing: 0%;
   text-align: center;
-  background-color: #BECBEE;
+  background-color: var(--accent, #BECBEE);
   cursor: pointer;
 
   /* вложенный блок «Оценка изменена» не должен раздувать родителя */
@@ -312,7 +339,7 @@ export const BtnSave = styled.button`
   opacity: 1;
   border-radius: 4px;
   border: none;
-  background-color: #D9D9D9;
+  background-color: var(--badge, #D9D9D9);
   font-family: Montserrat;
   font-weight: 400;
   font-style: Regular;
@@ -380,7 +407,7 @@ export const Notification = styled.div`
   bottom: 20px;
   right: 20px;
   padding: 15px;
-  background-color: ${({ success }) => (success ? '#4CAF50' : '#F44336')};
+  background-color: ${({ success }) => (success ? 'var(--success-bg, #4CAF50)' : 'var(--danger-bg, #F44336)')};
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -412,7 +439,7 @@ export const ErrorNotification = styled.div`
   bottom: 20px;
   left: 20px;
   padding: 15px;
-  background-color: #F44336;
+  background-color: var(--danger-bg, #F44336);
   color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -440,7 +467,7 @@ export const ErrorNotification = styled.div`
 `;
 
 export const LimitBlock = styled.div`
-    background-color:#F0F0F0;
+    background-color:var(--field, #F0F0F0);
     margin-top: 20px;
     padding: 32px 32px;
     border-radius: 4px;

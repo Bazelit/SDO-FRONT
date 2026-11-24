@@ -30,7 +30,7 @@ const SectionHeading = styled.h1`
   text-align: center;
   font-size: 29px;
   line-height: 35px;
-  color: #252525;
+  color: var(--text, #252525);
   font-family: "Montserrat";
 `;
 
@@ -45,11 +45,11 @@ const Form = styled.form`
     max-width: 100%;
     height: 35px;
     font-size: 16px;
-    color: #252525;
+    color: var(--text, #252525);
     font-family: "Montserrat";
     outline: none;
     box-sizing: border-box;
-    border: 1px solid #424451;
+    border: 1px solid var(--border, #424451);
     border-radius: 6px;
     padding: 0 8px;
   }
@@ -59,13 +59,13 @@ const Form = styled.form`
     max-width: 100%;
     height: 35px;
     font-size: 16px;
-    color: #252525;
+    color: var(--text, #252525);
     font-family: "Montserrat" !important;
     outline: none;
-    border: 1px solid #424451;
+    border: 1px solid var(--border, #424451);
     border-radius: 6px;
     padding: 0 8px;
-    background-color: #fff;
+    background-color: var(--surface, #fff);
     box-sizing: border-box;
   }
 
@@ -91,7 +91,7 @@ const CheckboxContainer = styled.div`
   gap: 12px;
   font-family: "Montserrat";
   font-size: 14px;
-  color: #252525;
+  color: var(--text, #252525);
 
   input{
     width: 18px;
@@ -108,13 +108,13 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 6px;
   border-style: none;
-  background-color: #C8D5F6;
+  background-color: var(--accent, #C8D5F6);
   font-size: 15px;
-  color: #252525;
+  color: var(--text, #252525);
   font-family: "Montserrat";
 
   &:hover {
-    background-color: #DDE5F9;
+    background-color: var(--accent-hover, #DDE5F9);
     color: #FFF;
     transition: 0.4s;
   }

@@ -6,6 +6,10 @@ import main from "../../img/main.svg";
 import labs from "../../img/labs.svg";
 import lk from "../../img/lk.svg";
 import add from "../../img/add.svg";
+import labsDark from "../../img/theme/labs-dark.svg";
+import addDark from "../../img/theme/add-dark.svg";
+import accountDark from "../../img/theme/account-dark.svg";
+import { useTheme } from "../ThemeContext";
 
 /* Нижняя панель навигации для телефонов (до 600px).
    Закреплена внизу экрана, учитывает «чёлку»/полоску жестов на iPhone.
@@ -18,7 +22,7 @@ const FooterStyle = styled.nav`
     bottom: 0;
     height: calc(64px + env(safe-area-inset-bottom, 0px));
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    background-color: #DDE5F8;
+    background-color: var(--mobile-nav, #DDE5F8);
     box-shadow: 0 -1px 0 rgba(65, 85, 136, 0.15);
     display: none;
     z-index: 1000;
@@ -41,7 +45,7 @@ const FooterStyle = styled.nav`
         gap: 4px;
         padding: 6px 4px;
         text-decoration: none;
-        color: #252525;
+        color: var(--mobile-nav-text, #252525);
         font-family: "Montserrat", sans-serif;
         font-size: 11px;
         line-height: 1.2;
@@ -59,25 +63,34 @@ const FooterStyle = styled.nav`
     .navBtn.active {
         opacity: 1;
         font-weight: 600;
-        background-color: rgba(200, 213, 246, 0.7);
+        background-color: var(--mobile-nav-active, rgba(200, 213, 246, 0.7));
     }
 
     .navBtn img {
         width: 24px;
         height: 24px;
     }
+
+    .navBtn--light-icon img { filter: brightness(0) invert(1); }
+
+    &.theme-dark {
+        height: calc(82px + env(safe-area-inset-bottom, 0px));
+        .navBtn { opacity: 1; gap: 2px; padding: 8px 4px 12px; font-size: 10px; }
+        .navBtn span { white-space: normal; line-height: 12px; max-width: 100px; }
+        .navBtn img { width: 36px; height: 36px; }
+    }
 `;
 
 const studentItems = [
     { to: "/", icon: main, label: "Главная" },
-    { to: "/StudLaboratory", icon: labs, label: "Лабораторные" },
-    { to: "/PersonalStud", icon: lk, label: "Кабинет" },
+    { to: "/StudLaboratory", icon: labs, darkIcon: labsDark, label: "Лабораторные" },
+    { to: "/PersonalStud", icon: lk, darkIcon: accountDark, label: "Кабинет" },
 ];
 
 const teacherItems = [
-    { to: "/laboratory", icon: labs, label: "Лабораторные" },
-    { to: "/LaboratoryAdd", icon: add, label: "Добавить" },
-    { to: "/PersonalTeacher", icon: lk, label: "Кабинет" },
+    { to: "/laboratory", icon: labs, darkIcon: labsDark, label: "Лабораторные", darkLabel: "Лабораторные работы" },
+    { to: "/LaboratoryAdd", icon: add, darkIcon: addDark, label: "Добавить", darkLabel: "Добавить лабораторную" },
+    { to: "/PersonalTeacher", icon: lk, darkIcon: accountDark, label: "Кабинет", darkLabel: "Личный кабинет" },
 ];
 
 const isActive = (pathname, to) => {
@@ -88,10 +101,12 @@ const isActive = (pathname, to) => {
 };
 
 const FooterMobile = ({ setIsLoggedIn, isLoggedIn }) => {
+    const { theme } = useTheme();
     const location = useLocation();
     // Роль читаем при каждом рендере (в т.ч. при смене страницы):
     // при входе она записывается в localStorage чуть позже, чем isLoggedIn.
-    const userRole = localStorage.getItem("status") || localStorage.getItem("role");
+    let userRole = null;
+    try { userRole = localStorage.getItem("status") || localStorage.getItem("role"); } catch { /* Navigation stays hidden if storage is unavailable. */ }
 
     const items =
         userRole === "student" ? studentItems : userRole === "teacher" ? teacherItems : [];
@@ -105,15 +120,15 @@ const FooterMobile = ({ setIsLoggedIn, isLoggedIn }) => {
     if (!visible) return null;
 
     return (
-        <FooterStyle aria-label="Основная навигация">
+        <FooterStyle className={theme === "dark" ? "theme-dark" : undefined} aria-label="Основная навигация">
             {items.map((item) => (
                 <Link
                     key={item.to}
                     to={item.to}
-                    className={`navBtn ${isActive(location.pathname, item.to) ? "active" : ""}`}
+                    className={`navBtn ${theme === "dark" && !item.darkIcon ? "navBtn--light-icon" : ""} ${isActive(location.pathname, item.to) ? "active" : ""}`}
                 >
-                    <img src={item.icon} alt="" />
-                    <span>{item.label}</span>
+                    <img src={theme === "dark" && item.darkIcon ? item.darkIcon : item.icon} alt="" />
+                    <span>{theme === "dark" && item.darkLabel ? item.darkLabel : item.label}</span>
                 </Link>
             ))}
         </FooterStyle>

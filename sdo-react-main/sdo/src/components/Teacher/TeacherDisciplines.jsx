@@ -37,7 +37,7 @@ const TeacherDisciplines = () => {
 
                         <div
                             style={{
-                                background: "#D9D9D9",
+                                background: "var(--badge, #D9D9D9)",
                                 padding: "6px 10px",
                                 borderRadius: "6px",
                                 fontSize: "14px"

@@ -15,7 +15,7 @@ const LabItemContainer = styled.div`
 
 const LabName = styled.p`
   font-size: 16px;
-  color: #000;
+  color: var(--text, #000);
   margin: 0;
   flex: 1;
   min-width: 0;
@@ -31,10 +31,10 @@ const LabGrade = styled.p`
   border-radius: 5px;
   background-color: ${({ $status }) =>
     $status === "success"
-      ? "#2E7D32"
+      ? "var(--success-bg, #2E7D32)"
       : $status === "notStarted"
-        ? "#757575"
-        : "#C62828"};
+        ? "var(--neutral-bg, #757575)"
+        : "var(--danger-bg, #C62828)"};
   color: white;
   margin: 0;
   font-weight: 600;
